@@ -2,7 +2,7 @@ import { NextPage } from 'next'
 import React from 'react'
 import { useRecoilState } from 'recoil'
 import { textState } from '../atoms/page'
-import AddCard from '../components/AddCard'
+import AddCard from '../components/AddCardButton'
 import Card from '../components/Card'
 import Nav from '../components/Nav'
 import { name } from '../site.config'
@@ -11,14 +11,29 @@ import { name } from '../site.config'
 
 const Home: NextPage = () => {
   return (
-    <main className="max-w-5xl mx-auto px-10">
+    <main className="max-w-5xl mx-auto px-16">
       <Nav />
-      <section className="grid grid-cols-3 gap-3 md:grid-cols-1">
+      <AddCard />
+      <section className="grid grid-cols-3 gap-x-5 md:grid-cols-1 my-16">
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
         <Card />
         <Card />
         <Card />
       </section>
-      <AddCard />
     </main>
   )
 }
