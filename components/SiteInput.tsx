@@ -2,7 +2,7 @@ import React from 'react'
 
 const SiteInput = () => {
   return (
-    <React.Fragment>
+    <form>
       <input
         className="container"
         type="text"
@@ -16,7 +16,7 @@ const SiteInput = () => {
         maxLength={30}
       />
       <input className="container" type="url" placeholder="사이트 URL" />
-    </React.Fragment>
+    </form>
   )
 }
 
