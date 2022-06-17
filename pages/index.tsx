@@ -16,9 +16,8 @@ const Home: NextPage = () => {
       <AddCard />
       <section className="grid grid-cols-3 gap-x-5 md:grid-cols-1 my-16">
         {cardList.map((v) => {
-          return <Card key={v.url} />
+          return <Card key={v.url} {...v} />
         })}
-        <Card />
       </section>
     </main>
   )

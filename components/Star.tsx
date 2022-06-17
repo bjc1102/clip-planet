@@ -8,7 +8,7 @@ const Star: React.FunctionComponent<IStarProps> = (props) => {
   const { check } = props
 
   return (
-    <div className="flex items-center mb-2">
+    <div className="flex items-center w-full mb-2 hover:cursor-pointer">
       <div className=" p-1 bg-gray-100 rounded-full text-yellow-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"

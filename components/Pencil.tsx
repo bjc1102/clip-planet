@@ -2,7 +2,7 @@ import React from 'react'
 
 const Pencil = () => {
   return (
-    <div className="w-8 h-8 rounded-full bg-gray-800 text-white dark:bg-gray-100 dark:text-gray-800 flex items-center justify-center">
+    <div className="w-8 h-8 rounded-full bg-gray-100 text-gray-800 flexCenter">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="icon icon-tabler icon-tabler-pencil"
