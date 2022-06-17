@@ -1,8 +1,9 @@
 import { atom } from 'recoil'
+import ICard from '../types/Card'
 
-const textState = atom({
-  key: 'textState', // unique ID (with respect to other atoms/selectors)
-  default: '', // default value (aka initial value)
+const CardListState = atom<ICard[]>({
+  key: 'cardListState', // unique ID (with respect to other atoms/selectors)
+  default: [],
 })
 
-export { textState }
+export { CardListState }

@@ -8,13 +8,13 @@ const Star: React.FunctionComponent<IStarProps> = (props) => {
   const { check } = props
 
   return (
-    <div className="mb-3 flex items-center">
-      <div className="p-1 bg-gray-800 dark:bg-gray-100 rounded-full text-yellow-500">
+    <div className="flex items-center mb-2">
+      <div className=" p-1 bg-gray-100 rounded-full text-yellow-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="icon icon-tabler icon-tabler-star"
-          width={16}
-          height={16}
+          width={20}
+          height={20}
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
