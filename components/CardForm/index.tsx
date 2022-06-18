@@ -1,20 +1,27 @@
 import React from 'react'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { nanoid } from 'nanoid'
 
 import Input from '../Input'
 import SiteForm from './SiteForm'
-import { CardListState } from '../../atoms/page'
+import { CardListState } from '../../atoms/card'
 import { getNowDate } from '../../utils/getDate'
 
 import ICard from '../../types/Card'
 import { IForm } from '../../types/Form'
 
-const AddCard = () => {
+interface IAddCardProps {
+  type?: string
+}
+
+const AddCard: React.FC<IAddCardProps> = (props) => {
+  const { type = '추가' } = props
   const [form, setForm] = React.useState<IForm>({
     title: '',
     content: '',
     url: '',
   })
+  const cardList = useRecoilValue(CardListState)
   const setCardList = useSetRecoilState(CardListState)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,6 +29,7 @@ const AddCard = () => {
     setCardList((oldValue: ICard[]) => {
       return [
         {
+          id: nanoid(),
           ...form,
           date: getNowDate(),
           isMark: false,
@@ -29,7 +37,9 @@ const AddCard = () => {
         ...oldValue,
       ]
     })
+    console.log(cardList)
   }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setForm((oldValue: IForm) => {

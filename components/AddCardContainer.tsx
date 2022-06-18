@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import AddCard from './CardForm'
 
-const AddCardBox: React.FC = () => {
+const AddCardContainer: React.FC = () => {
   return (
     <div>
       <motion.div
@@ -18,4 +18,4 @@ const AddCardBox: React.FC = () => {
   )
 }
 
-export default AddCardBox
+export default AddCardContainer
