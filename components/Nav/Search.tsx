@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Search: React.FunctionComponent = () => {
+const Search: React.FC = () => {
   return (
     <input
       placeholder="제목 검색하기"

@@ -1,7 +1,6 @@
 import React from 'react'
-import Pencil from './Pencil'
-import Star from './Star'
-import { MockCardData } from '../Mock/MockCardData'
+import Pencil from './assets/Pencil'
+import Star from './assets/Star'
 import ICard from '../types/Card'
 
 const Card: React.FunctionComponent<ICard> = (props) => {
@@ -10,7 +9,7 @@ const Card: React.FunctionComponent<ICard> = (props) => {
     <div className="mx-auto container">
       <div className="rounded">
         <div className="w-full h-72 flex flex-col justify-between bg-gray-800 border-gray-700 rounded-lg border  mb-6 py-5 px-4">
-          <a target="_blank" href={MockCardData.url} rel="noreferrer">
+          <a target="_blank" href={url} rel="noreferrer">
             <div>
               <h3 className="text-gray-100 leading-7 font-semibold w-11/12">
                 {title}

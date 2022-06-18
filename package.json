@@ -1,5 +1,5 @@
 {
-  "name": "teama-ts",
+  "name": "startup-page",
   "private": true,
   "scripts": {
     "dev": "next dev",
