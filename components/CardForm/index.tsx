@@ -1,28 +1,34 @@
 import React from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import { nanoid } from 'nanoid'
+import _ from 'lodash'
 
 import Input from '../Input'
 import SiteForm from './SiteForm'
-import { CardListState } from '../../atoms/card'
+import { CardListState, defaultFormValue } from '../../atoms/card'
 import { getNowDate } from '../../utils/getDate'
+import { modalState } from '../../atoms/modal'
 
 import ICard from '../../types/Card'
-import { IForm } from '../../types/Form'
+import IForm from '../../types/Form'
 
-interface IAddCardProps {
-  id?: string
-  type?: string
-}
+const CardForm: React.FC = () => {
+  const [cardList, setCardList] = useRecoilState(CardListState)
+  const [modal, setModal] = useRecoilState(modalState)
+  const [form, setForm] = React.useState<IForm>(() => {
+    const findCard = _.find(cardList, {
+      id: modal.id,
+    })
 
-const AddCard: React.FC<IAddCardProps> = (props) => {
-  const [form, setForm] = React.useState<IForm>({
-    title: '',
-    content: '',
-    url: '',
+    console.log(findCard)
+    return findCard
+      ? {
+          title: findCard?.title,
+          content: findCard?.content,
+          url: findCard?.url,
+        }
+      : defaultFormValue
   })
-  const setCardList = useSetRecoilState(CardListState)
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setCardList((oldValue: ICard[]) => {
@@ -36,8 +42,11 @@ const AddCard: React.FC<IAddCardProps> = (props) => {
         ...oldValue,
       ]
     })
+    setModal({
+      id: '',
+      state: false,
+    })
   }
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setForm((oldValue: IForm) => {
@@ -47,11 +56,13 @@ const AddCard: React.FC<IAddCardProps> = (props) => {
       }
     })
   }
+
   return (
     <SiteForm onSubmit={handleSubmit}>
       <div className="flex flex-col gap-3 p-3">
         <Input
           name="title"
+          value={form.title}
           type="text"
           required
           placeholder="제목을 입력해주세요"
@@ -60,6 +71,7 @@ const AddCard: React.FC<IAddCardProps> = (props) => {
         />
         <Input
           name="content"
+          value={form.content}
           type="text"
           placeholder="내용을 입력해주세요"
           maxLength={30}
@@ -67,6 +79,7 @@ const AddCard: React.FC<IAddCardProps> = (props) => {
         />
         <Input
           name="url"
+          value={form.url}
           type="url"
           required
           placeholder="URL을 입력해주세요"
@@ -85,4 +98,4 @@ const AddCard: React.FC<IAddCardProps> = (props) => {
   )
 }
 
-export default AddCard
+export default CardForm

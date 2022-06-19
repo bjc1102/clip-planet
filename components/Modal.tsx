@@ -1,12 +1,15 @@
 import React from 'react'
-import AddCard from '../CardForm'
-import CloseIcon from '../assets/Clost'
+import CardForm from './CardForm'
+import CloseIcon from './assets/CloseIcon'
 import { useSetRecoilState } from 'recoil'
-import { modalState } from '../../atoms/modal'
+import { defaultModalState, modalState } from '../atoms/modal'
 
 const AddCardModal: React.FC = () => {
   const setModal = useSetRecoilState(modalState)
-
+  const toggle = () =>
+    setModal({
+      ...defaultModalState,
+    })
   return (
     <div
       tabIndex={-1}
@@ -21,7 +24,7 @@ const AddCardModal: React.FC = () => {
               조건을 걸어줘야함
             </h3>
             <button
-              onClick={() => setModal(false)}
+              onClick={toggle}
               type="button"
               className="rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:bg-gray-600 hover:text-white"
             >
@@ -29,7 +32,7 @@ const AddCardModal: React.FC = () => {
             </button>
           </div>
           {/* content */}
-          <AddCard />
+          <CardForm />
         </div>
       </div>
     </div>

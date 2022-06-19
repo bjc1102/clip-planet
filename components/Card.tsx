@@ -1,10 +1,38 @@
 import React from 'react'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import _ from 'lodash'
+
+import { modalState } from '../atoms/modal'
 import Pencil from './assets/Pencil'
 import Star from './assets/Star'
 import ICard from '../types/Card'
+import { CardListState } from '../atoms/card'
 
 const Card: React.FunctionComponent<ICard> = (props) => {
-  const { title, content, url, date, isMark } = props
+  const { id, title, content, url, date, isMark } = props
+  const [cardList, setCardList] = useRecoilState(CardListState)
+  const setModal = useSetRecoilState(modalState)
+  const handlePencilIcon = () => {
+    setModal({
+      id: id,
+      state: true,
+    })
+  }
+  const handleStarIcon = () => {
+    const index = _.findIndex(cardList, {
+      id: id,
+    })
+    setCardList(() => {
+      return [
+        ...cardList.slice(0, index),
+        {
+          ...props,
+          isMark: !isMark,
+        },
+        ...cardList.slice(index + 1, cardList.length),
+      ]
+    })
+  }
   return (
     <div className="mx-auto container">
       <div className="rounded">
@@ -23,12 +51,20 @@ const Card: React.FunctionComponent<ICard> = (props) => {
             </div>
           </a>
           <div>
-            <div className="w-8 h-8" onClick={() => console.log(!isMark)}>
-              <Star check={isMark} />
+            <div
+              className="w-7 h-7 mb-2 rounded-full bg-gray-100 text-gray-800 flexCenter hover:cursor-pointer"
+              onClick={handleStarIcon}
+            >
+              <Star isMark={isMark} />
             </div>
             <div className="flex items-center justify-between text-gray-800 dark:text-gray-100">
               <p className="text-sm">{date}</p>
-              <Pencil />
+              <div
+                className="p-1 rounded-full text-gray-700 bg-gray-100 cursor-pointer"
+                onClick={handlePencilIcon}
+              >
+                <Pencil />
+              </div>
             </div>
           </div>
         </div>
@@ -37,4 +73,4 @@ const Card: React.FunctionComponent<ICard> = (props) => {
   )
 }
 
-export default Card
+export default React.memo(Card)
