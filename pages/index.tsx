@@ -1,10 +1,10 @@
 import { NextPage } from 'next'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
-import _ from 'lodash'
 
 import { modalState } from '../atoms/modal'
 import { CardListState } from '../atoms/card'
+
 import AddCardModal from '../components/Modal'
 import Card from '../components/Card'
 import Nav from '../components/Header'

@@ -23,9 +23,9 @@ const CardForm: React.FC = () => {
     console.log(findCard)
     return findCard
       ? {
-          title: findCard?.title,
-          content: findCard?.content,
-          url: findCard?.url,
+          title: findCard.title,
+          content: findCard.content,
+          url: findCard.url,
         }
       : defaultFormValue
   })
