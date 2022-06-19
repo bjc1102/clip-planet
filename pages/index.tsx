@@ -6,7 +6,7 @@ import { modalState } from '../atoms/modal'
 import { CardListState } from '../atoms/card'
 import AddCardModal from '../components/Modal/AddCardModal'
 import Card from '../components/Card'
-import Nav from '../components/Nav'
+import Nav from '../components/Header'
 import ModalOpenButton from '../components/Modal/ModalOpenButton'
 
 //BEM 방식 ( block , element , model )
