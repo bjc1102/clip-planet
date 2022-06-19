@@ -9,14 +9,16 @@ interface ITextInputProps
 }
 
 const Input: React.FC<ITextInputProps> = (props) => {
-  const { name, type, maxLength, onChange } = props
+  const { name, type, placeholder, required, maxLength, onChange } = props
   return (
     <input
       className="theme-container rounded-lg py-2 px-4  outline-none"
       name={name}
       type={type}
-      maxLength={maxLength}
       onChange={onChange}
+      required={required}
+      placeholder={placeholder}
+      maxLength={maxLength}
     />
   )
 }

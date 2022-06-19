@@ -20,9 +20,6 @@ const SiteForm: React.FunctionComponent<IFormProps> = (props) => {
       onSubmit={onSubmit}
     >
       {children}
-      <button className="flex-1 border border-accent rounded-lg" type="submit">
-        저장
-      </button>
     </form>
   )
 }

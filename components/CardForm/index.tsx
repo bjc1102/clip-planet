@@ -11,17 +11,16 @@ import ICard from '../../types/Card'
 import { IForm } from '../../types/Form'
 
 interface IAddCardProps {
+  id?: string
   type?: string
 }
 
 const AddCard: React.FC<IAddCardProps> = (props) => {
-  const { type = '추가' } = props
   const [form, setForm] = React.useState<IForm>({
     title: '',
     content: '',
     url: '',
   })
-  const cardList = useRecoilValue(CardListState)
   const setCardList = useSetRecoilState(CardListState)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -37,7 +36,6 @@ const AddCard: React.FC<IAddCardProps> = (props) => {
         ...oldValue,
       ]
     })
-    console.log(cardList)
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,14 +49,28 @@ const AddCard: React.FC<IAddCardProps> = (props) => {
   }
   return (
     <SiteForm onSubmit={handleSubmit}>
-      <Input name="title" type="text" maxLength={30} onChange={handleChange} />
+      <Input
+        name="title"
+        type="text"
+        required
+        maxLength={30}
+        onChange={handleChange}
+      />
       <Input
         name="content"
         type="text"
         maxLength={30}
         onChange={handleChange}
       />
-      <Input name="url" type="url" onChange={handleChange} />
+      <Input name="url" type="url" required onChange={handleChange} />
+      <div className="flex justify-end items-center p-3 space-x-2 rounded-b border-t border-gray-600">
+        <button
+          type="submit"
+          className="focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
+        >
+          등록하기
+        </button>
+      </div>
     </SiteForm>
   )
 }
