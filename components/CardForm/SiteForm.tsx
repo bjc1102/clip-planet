@@ -15,10 +15,7 @@ const SiteForm: React.FunctionComponent<IFormProps> = (props) => {
   const { children, onSubmit } = props
 
   return (
-    <form
-      className="flex flex-col gap-2 my-3 overflow-hidden p-1"
-      onSubmit={onSubmit}
-    >
+    <form className="flex flex-col overflow-hidden" onSubmit={onSubmit}>
       {children}
     </form>
   )

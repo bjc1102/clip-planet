@@ -1,9 +1,12 @@
 import React from 'react'
-import { motion } from 'framer-motion'
-import AddCard from './CardForm'
-import CloseIcon from './assets/Clost'
+import AddCard from '../CardForm'
+import CloseIcon from '../assets/Clost'
+import { useSetRecoilState } from 'recoil'
+import { modalState } from '../../atoms/modal'
 
 const AddCardModal: React.FC = () => {
+  const setModal = useSetRecoilState(modalState)
+
   return (
     <div
       tabIndex={-1}
@@ -18,6 +21,7 @@ const AddCardModal: React.FC = () => {
               조건을 걸어줘야함
             </h3>
             <button
+              onClick={() => setModal(false)}
               type="button"
               className="rounded-lg text-sm p-1.5 ml-auto inline-flex items-center hover:bg-gray-600 hover:text-white"
             >

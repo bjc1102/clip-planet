@@ -49,20 +49,30 @@ const AddCard: React.FC<IAddCardProps> = (props) => {
   }
   return (
     <SiteForm onSubmit={handleSubmit}>
-      <Input
-        name="title"
-        type="text"
-        required
-        maxLength={30}
-        onChange={handleChange}
-      />
-      <Input
-        name="content"
-        type="text"
-        maxLength={30}
-        onChange={handleChange}
-      />
-      <Input name="url" type="url" required onChange={handleChange} />
+      <div className="flex flex-col gap-3 p-3">
+        <Input
+          name="title"
+          type="text"
+          required
+          placeholder="제목을 입력해주세요"
+          maxLength={30}
+          onChange={handleChange}
+        />
+        <Input
+          name="content"
+          type="text"
+          placeholder="내용을 입력해주세요"
+          maxLength={30}
+          onChange={handleChange}
+        />
+        <Input
+          name="url"
+          type="url"
+          required
+          placeholder="URL을 입력해주세요"
+          onChange={handleChange}
+        />
+      </div>
       <div className="flex justify-end items-center p-3 space-x-2 rounded-b border-t border-gray-600">
         <button
           type="submit"
