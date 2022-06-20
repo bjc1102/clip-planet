@@ -7,7 +7,7 @@ export const defaultModalState = {
 
 interface IModalState {
   state: boolean
-  id?: string
+  id: string
 }
 
 const modalState = atom<IModalState>({

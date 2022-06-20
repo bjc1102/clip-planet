@@ -1,16 +1,15 @@
 import React from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
-import { nanoid } from 'nanoid'
+import { useRecoilState } from 'recoil'
 import _ from 'lodash'
 
 import Input from '../Input'
 import SiteForm from './SiteForm'
 import { CardListState, defaultFormValue } from '../../atoms/card'
-import { getNowDate } from '../../utils/getDate'
-import { modalState } from '../../atoms/modal'
+import { defaultModalState, modalState } from '../../atoms/modal'
 
 import ICard from '../../types/Card'
 import IForm from '../../types/Form'
+import { getCardData, getSliceCardData } from '../../utils/handleData'
 
 const CardForm: React.FC = () => {
   const [cardList, setCardList] = useRecoilState(CardListState)
@@ -19,8 +18,6 @@ const CardForm: React.FC = () => {
     const findCard = _.find(cardList, {
       id: modal.id,
     })
-
-    console.log(findCard)
     return findCard
       ? {
           title: findCard.title,
@@ -32,19 +29,30 @@ const CardForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setCardList((oldValue: ICard[]) => {
+      if (!modal.id.length) {
+        return [
+          {
+            ...getCardData(form),
+          },
+          ...oldValue,
+        ]
+      }
+
+      const Idx = _.findIndex(cardList, { id: modal.id })
       return [
-        {
-          id: nanoid(),
-          ...form,
-          date: getNowDate(),
-          isMark: false,
-        },
-        ...oldValue,
+        ...getSliceCardData({
+          cardList,
+          index: Idx,
+          value: {
+            ...cardList[Idx],
+            ...form,
+          },
+        }),
       ]
     })
+
     setModal({
-      id: '',
-      state: false,
+      ...defaultModalState,
     })
   }
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

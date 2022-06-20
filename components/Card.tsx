@@ -7,11 +7,14 @@ import Pencil from './assets/Pencil'
 import Star from './assets/Star'
 import ICard from '../types/Card'
 import { CardListState } from '../atoms/card'
+import { getSliceCardData } from '../utils/handleData'
 
 const Card: React.FunctionComponent<ICard> = (props) => {
   const { id, title, content, url, date, isMark } = props
+
   const [cardList, setCardList] = useRecoilState(CardListState)
   const setModal = useSetRecoilState(modalState)
+
   const handlePencilIcon = () => {
     setModal({
       id: id,
@@ -24,12 +27,14 @@ const Card: React.FunctionComponent<ICard> = (props) => {
     })
     setCardList(() => {
       return [
-        ...cardList.slice(0, index),
-        {
-          ...props,
-          isMark: !isMark,
-        },
-        ...cardList.slice(index + 1, cardList.length),
+        ...getSliceCardData({
+          cardList,
+          index,
+          value: {
+            ...cardList[index],
+            isMark: !isMark,
+          },
+        }),
       ]
     })
   }

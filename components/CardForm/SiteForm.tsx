@@ -3,13 +3,10 @@ import React from 'react'
 // interface ISiteInputProps {
 //   id?: string
 // }
-interface IFormProps
-  extends React.DetailedHTMLProps<
-    React.FormHTMLAttributes<HTMLFormElement>,
-    HTMLFormElement
-  > {
-  type?: '추가' | '수정'
-}
+type IFormProps = React.DetailedHTMLProps<
+  React.FormHTMLAttributes<HTMLFormElement>,
+  HTMLFormElement
+>
 
 const SiteForm: React.FunctionComponent<IFormProps> = (props) => {
   const { children, onSubmit } = props
