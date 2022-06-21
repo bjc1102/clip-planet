@@ -1,1 +1,11 @@
-## Typescript + Eslint + Tailwind CSS + commitlint , husky
+# startup-page(시작 페이지 관리)
+
+## 사용 방법
+
+<br>
+
+### 1. 윈도우 기준
+<br>
+1.1크롬 설정 -  도구 더보기 -  탭 - 바로가기 만들기를 통해 바탕화면의 새로운 페이지를 만들어줍니다.
+<br>
+![설정하기 이미지](./public/README/use.PNG)
