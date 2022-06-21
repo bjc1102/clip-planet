@@ -8,6 +8,7 @@ import Star from './assets/Star'
 import ICard from '../types/Card'
 import { CardListState } from '../atoms/card'
 import { getSliceCardData } from '../utils/handleData'
+import CloseIcon from './assets/CloseIcon'
 
 const Card: React.FunctionComponent<ICard> = (props) => {
   const { id, title, content, url, date, isMark } = props
@@ -38,15 +39,29 @@ const Card: React.FunctionComponent<ICard> = (props) => {
       ]
     })
   }
+  const handleCloseIcon = () => {
+    const index = _.findIndex(cardList, {
+      id: id,
+    })
+    setCardList(() => {
+      return [...cardList.slice(0, index), ...cardList.slice(index + 1)]
+    })
+  }
   return (
     <div className="mx-auto container">
       <div className="rounded">
         <div className="w-full h-72 flex flex-col justify-between bg-gray-800 border-gray-700 rounded-lg border  mb-6 py-5 px-4">
           <a target="_blank" href={url} rel="noreferrer">
-            <div>
+            <div className="flex justify-between">
               <h3 className="text-gray-100 leading-7 font-semibold w-11/12">
                 {title}
               </h3>
+              <div
+                onClick={handleCloseIcon}
+                className="rounded-lg text-sm p-1 ml-auto inline-flex items-center hover:bg-gray-600 hover:text-white"
+              >
+                <CloseIcon />
+              </div>
             </div>
             <div>
               <p className="text-sm break-words my-2">{content}</p>
