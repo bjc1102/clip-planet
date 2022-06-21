@@ -1,11 +1,11 @@
 import React from 'react'
 import CardForm from './CardForm'
 import CloseIcon from './assets/CloseIcon'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import { defaultModalState, modalState } from '../atoms/modal'
 
 const AddCardModal: React.FC = () => {
-  const setModal = useSetRecoilState(modalState)
+  const [modal, setModal] = useRecoilState(modalState)
   const toggle = () =>
     setModal({
       ...defaultModalState,
@@ -21,7 +21,7 @@ const AddCardModal: React.FC = () => {
         <div className="relative rounded-lg shadow bg-gray-800 border ">
           <div className="flex justify-between items-start p-4 rounded-t border-b border-gray-600">
             <h3 className="text-xl font-semibold text-white">
-              조건을 걸어줘야함
+              {modal.id.length ? '수정' : '추가'}
             </h3>
             <button
               onClick={toggle}
