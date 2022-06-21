@@ -26,6 +26,7 @@ const CardForm: React.FC = () => {
         }
       : defaultFormValue
   })
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setCardList((oldValue: ICard[]) => {
