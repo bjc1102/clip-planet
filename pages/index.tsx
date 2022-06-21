@@ -16,13 +16,8 @@ const Home: NextPage = () => {
   const cardList = useRecoilValue(CardListState)
   const modal = useRecoilValue(modalState)
 
-  if (typeof window !== 'undefined') {
-    console.log('You are on the browser')
-    // 👉️ can use localStorage here
-  } else {
-    console.log('You are on the server')
-    // 👉️ can't use localStorage
-  }
+  // console.log(JSON.parse(LocalStorage.getItem('current_cardList')))
+
   return (
     <main className="max-w-5xl mx-auto px-16">
       <Nav />

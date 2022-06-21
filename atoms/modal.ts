@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid'
 import { atom } from 'recoil'
 
 export const defaultModalState = {
@@ -11,7 +12,7 @@ interface IModalState {
 }
 
 const modalState = atom<IModalState>({
-  key: 'modalState', // unique ID (with respect to other atoms/selectors)
+  key: nanoid(), // unique ID (with respect to other atoms/selectors)
   default: defaultModalState,
 })
 

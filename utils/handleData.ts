@@ -9,7 +9,7 @@ import IForm from '../types/Form'
 interface ISliceCardData {
   cardList: ICard[]
   index: number
-  value: any
+  value?: any
 }
 
 export const getCardData = (props: IForm): ICard => {
@@ -28,7 +28,7 @@ export const getSliceCardData = ({
 }: ISliceCardData): ICard[] => {
   return [
     ...cardList.slice(0, index),
-    {
+    value && {
       ...value,
     },
     ...cardList.slice(index + 1),
