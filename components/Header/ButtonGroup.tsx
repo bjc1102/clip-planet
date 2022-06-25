@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from './Button'
+import CategoryButton from './CategoryButton'
 import { nanoid } from 'nanoid'
 import { useRecoilState } from 'recoil'
 import { conditionState, defaultConditionState } from '../../atoms/condition'
@@ -39,9 +39,10 @@ const ButtonGroup = () => {
     >
       {buttonList.map((v, index, arr) => {
         return (
-          <Button
+          <CategoryButton
             key={nanoid()}
             title={v.title}
+            nowType={condition.type}
             index={index}
             length={arr.length}
             onClick={v.onClick}
