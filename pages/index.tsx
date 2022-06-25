@@ -10,7 +10,6 @@ import Card from '../components/Card'
 import Nav from '../components/Header'
 import ModalOpenButton from '../components/ModalOpenButton'
 import { conditionState } from '../atoms/condition'
-import _ from 'lodash'
 
 //BEM 방식 ( block , element , model )
 

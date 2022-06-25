@@ -7,6 +7,7 @@ const Search: React.FC = () => {
   const setCond = useSetRecoilState(conditionState)
   const handleSearchData = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
+    // eslint-disable-next-line
     const { name, value } = e.target
     if (value === '') {
       setCond(() => {
