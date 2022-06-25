@@ -17,7 +17,7 @@ const Search: React.FC = () => {
     } else {
       setCond(() => {
         return {
-          type: 'search',
+          type: '검색',
           search: value,
         }
       })

@@ -21,12 +21,12 @@ const Home: NextPage = () => {
 
   const FilterData = () => {
     switch (cond.type) {
-      case 'search':
+      case '검색':
         return cardList.map((v) => {
           return v.title.includes(cond.search) && <Card key={v.id} {...v} />
         })
         break
-      case 'marked':
+      case '즐겨찾기':
         return cardList.map((v) => {
           return v.isMark && <Card key={v.id} {...v} />
         })
