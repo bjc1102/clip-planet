@@ -9,23 +9,47 @@ import AddCardModal from '../components/Modal'
 import Card from '../components/Card'
 import Nav from '../components/Header'
 import ModalOpenButton from '../components/ModalOpenButton'
+import { conditionState } from '../atoms/condition'
+import _ from 'lodash'
 
 //BEM 방식 ( block , element , model )
 
 const Home: NextPage = () => {
   const cardList = useRecoilValue(CardListState)
   const modal = useRecoilValue(modalState)
+  const cond = useRecoilValue(conditionState)
 
-  // console.log(JSON.parse(LocalStorage.getItem('current_cardList')))
+  const FilterData = () => {
+    switch (cond.type) {
+      case 'search':
+        return cardList.map((v) => {
+          return v.title.includes(cond.search) && <Card key={v.id} {...v} />
+        })
+        break
+      case 'marked':
+        return cardList.map((v) => {
+          return v.isMark && <Card key={v.id} {...v} />
+        })
+        break
+      case '':
+        return cardList.map((v) => {
+          return <Card key={v.id} {...v} />
+        })
+        break
+      default:
+        return cardList.map((v) => {
+          return <Card key={v.id} {...v} />
+        })
+        break
+    }
+  }
 
   return (
     <main className="max-w-5xl mx-auto px-16">
       <Nav />
       {modal.state && <AddCardModal />}
       <section className="grid grid-cols-3 gap-x-5 md:grid-cols-1 my-16">
-        {cardList.map((v) => {
-          return <Card key={v.id} {...v} />
-        })}
+        {FilterData()}
       </section>
       <ModalOpenButton />
     </main>
