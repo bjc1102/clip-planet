@@ -27,5 +27,3 @@
 ![설정하기3 이미지](./public/README/use3.PNG)
 
 <br/>
-
----
