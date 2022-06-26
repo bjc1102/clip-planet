@@ -2,14 +2,12 @@ import { NextPage } from 'next'
 import React from 'react'
 import { useRecoilValue } from 'recoil'
 
-import { modalState } from '../atoms/modal'
-import { CardListState } from '../atoms/card'
+import { modalState, conditionState, CardListState } from '../atoms/atoms'
 
 import AddCardModal from '../components/Modal'
 import Card from '../components/Card'
 import Nav from '../components/Header'
 import ModalOpenButton from '../components/ModalOpenButton'
-import { conditionState } from '../atoms/condition'
 
 //BEM 방식 ( block , element , model )
 

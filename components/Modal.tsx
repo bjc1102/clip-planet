@@ -2,7 +2,8 @@ import React from 'react'
 import CardForm from './CardForm'
 import CloseIcon from './assets/CloseIcon'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { defaultModalState, modalState } from '../atoms/modal'
+import { modalState } from '../atoms/atoms'
+import { defaultModalState } from '../atoms/atomsValue'
 
 const AddCardModal: React.FC = () => {
   const [modal, setModal] = useRecoilState(modalState)

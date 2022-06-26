@@ -2,11 +2,11 @@ import React from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import _ from 'lodash'
 
-import { modalState } from '../atoms/modal'
+import { modalState } from '../atoms/atoms'
 import Pencil from './assets/Pencil'
 import Star from './assets/Star'
 import ICard from '../types/Card'
-import { CardListState } from '../atoms/card'
+import { CardListState } from '../atoms/atoms'
 import { getSliceCardData } from '../utils/handleData'
 import CloseIcon from './assets/CloseIcon'
 

@@ -4,8 +4,8 @@ import _ from 'lodash'
 
 import Input from '../Input'
 import SiteForm from './SiteForm'
-import { CardListState, defaultFormValue } from '../../atoms/card'
-import { defaultModalState, modalState } from '../../atoms/modal'
+import { CardListState, modalState } from '../../atoms/atoms'
+import { defaultModalState, defaultFormValue } from '../../atoms/atomsValue'
 
 import ICard from '../../types/Card'
 import IForm from '../../types/Form'

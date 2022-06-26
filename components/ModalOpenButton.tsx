@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSetRecoilState } from 'recoil'
-import { modalState } from '../atoms/modal'
+import { modalState } from '../atoms/atoms'
 import PlusIcon from './assets/Plus'
 
 const ModalOpenButton: React.FC = () => {

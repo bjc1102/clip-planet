@@ -1,14 +1,14 @@
 import React from 'react'
+import ReactMarkdown from 'react-markdown'
 import { Octokit } from '@octokit/core'
-
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 
 const Manual: NextPage = ({
   markdown,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <div className="mx-auto max-w-full">
-      <article className="prose lg:prose-xl">{markdown}</article>
+    <div className="mx-auto max-w-full prose">
+      <ReactMarkdown>{markdown}</ReactMarkdown>
     </div>
   )
 }
@@ -16,10 +16,6 @@ const Manual: NextPage = ({
 export default Manual
 
 export const getStaticProps: GetStaticProps = async () => {
-  // const response = await axios({
-  //   url: 'https://api.github.com/repos/zafar-saleem/anymnd/git/blobs/7af90ceab018a889b46634331cab822d94ff2b19',
-  // })
-  // console.log('response: ', response.data)
   const token = process.env.ACCESS_TOKEN
   const octokit = new Octokit({
     auth: token,

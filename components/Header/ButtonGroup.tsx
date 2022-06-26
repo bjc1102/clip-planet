@@ -2,7 +2,8 @@ import React from 'react'
 import CategoryButton from './CategoryButton'
 import { nanoid } from 'nanoid'
 import { useRecoilState } from 'recoil'
-import { conditionState, defaultConditionState } from '../../atoms/condition'
+import { conditionState } from '../../atoms/atoms'
+import { defaultConditionState } from '../../atoms/atomsValue'
 
 interface IButtonGroup {
   title: string
