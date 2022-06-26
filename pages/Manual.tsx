@@ -1,9 +1,11 @@
 import React from 'react'
 import axios from 'axios'
 
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 
-const Manual: InferGetStaticPropsType<typeof getStaticProps> = () => {
+const Manual: NextPage = ({
+  text,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return <article className="prose lg:prose-xl"></article>
 }
 
