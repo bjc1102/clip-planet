@@ -1,13 +1,16 @@
 import React from 'react'
-import axios from 'axios'
 import { Octokit } from '@octokit/core'
 
 import { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 
 const Manual: NextPage = ({
-  text,
+  markdown,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  return <article className="prose lg:prose-xl"></article>
+  return (
+    <div className="mx-auto max-w-full">
+      <article className="prose lg:prose-xl">{markdown}</article>
+    </div>
+  )
 }
 
 export default Manual
@@ -29,13 +32,13 @@ export const getStaticProps: GetStaticProps = async () => {
       path: 'README.md',
     }
   )
-  // const decodeData = atob(result.data)
   //@ts-ignore
-  console.log(result.data.content)
-  const text = '123'
+  const decodeData = Buffer.from(result.data.content, 'base64')
+  const markdown = decodeData.toString()
+  console.log(markdown)
   return {
     props: {
-      text,
+      markdown,
     },
   }
 }
