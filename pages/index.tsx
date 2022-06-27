@@ -17,28 +17,19 @@ const Home: NextPage = () => {
   const cond = useRecoilValue(conditionState)
 
   const FilterData = () => {
-    switch (cond.type) {
-      case '검색':
-        return cardList.map((v) => {
-          return v.title.includes(cond.search) && <Card key={v.id} {...v} />
-        })
-        break
-      case '즐겨찾기':
-        return cardList.map((v) => {
-          return v.isMark && <Card key={v.id} {...v} />
-        })
-        break
-      case '':
-        return cardList.map((v) => {
-          return <Card key={v.id} {...v} />
-        })
-        break
-      default:
-        return cardList.map((v) => {
-          return <Card key={v.id} {...v} />
-        })
-        break
+    if (cond.type === '키워드') {
+      return cardList.map((v) => {
+        return v.title.includes(cond.type) && <Card key={v.id} {...v} />
+      })
     }
+    if (cond.type === '즐겨찾기')
+      return cardList.map((v) => {
+        return v.isMark && <Card key={v.id} {...v} />
+      })
+
+    return cardList.map((v) => {
+      return <Card key={v.id} {...v} />
+    })
   }
 
   return (

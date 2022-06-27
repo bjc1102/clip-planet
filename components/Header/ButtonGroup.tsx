@@ -1,9 +1,9 @@
 import React from 'react'
 import CategoryButton from './CategoryButton'
 import { nanoid } from 'nanoid'
-import { useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 import { conditionState } from '../../atoms/atoms'
-import { defaultConditionState } from '../../atoms/atomsValue'
+import { useConditionUpdater } from '../../hooks/useConditionStatus'
 
 interface IButtonGroup {
   title: string
@@ -11,25 +11,15 @@ interface IButtonGroup {
 }
 
 const ButtonGroup = () => {
-  const [condition, setCondition] = useRecoilState(conditionState)
+  const condition = useRecoilValue(conditionState)
+  const { cond, setConditionUpdate } = useConditionUpdater()
   const buttonList: IButtonGroup[] = [
     {
       title: '즐겨찾기',
-      onClick: () =>
-        setCondition(() => {
-          if (condition.type === '')
-            return {
-              ...condition,
-              type: '즐겨찾기',
-            }
-          else
-            return {
-              ...defaultConditionState,
-            }
-        }),
+      onClick: () => setConditionUpdate('즐겨찾기'),
     },
     {
-      title: '+',
+      title: '키워드 + ',
       onClick: () => console.log('추가 예정'),
     },
   ]

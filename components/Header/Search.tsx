@@ -19,7 +19,7 @@ const Search: React.FC = () => {
     } else {
       setCond(() => {
         return {
-          type: '검색',
+          type: '키워드',
           search: value,
         }
       })

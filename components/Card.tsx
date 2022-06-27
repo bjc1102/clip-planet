@@ -9,19 +9,17 @@ import ICard from '../types/Card'
 import { CardListState } from '../atoms/atoms'
 import { getSliceCardData } from '../utils/handleData'
 import CloseIcon from './assets/CloseIcon'
+import useModal from '../hooks/useModal'
 
 const Card: React.FunctionComponent<ICard> = (props) => {
   const { id, title, content, url, date, isMark } = props
 
   const [cardList, setCardList] = useRecoilState(CardListState)
-  const setModal = useSetRecoilState(modalState)
+  const { setModalToggle } = useModal()
 
   const handlePencilIcon = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault()
-    setModal({
-      id: id,
-      state: true,
-    })
+    setModalToggle(id)
   }
   const handleStarIcon = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault()

@@ -1,16 +1,11 @@
 import React from 'react'
 import CardForm from './CardForm'
 import CloseIcon from './assets/CloseIcon'
-import { useRecoilState, useSetRecoilState } from 'recoil'
-import { modalState } from '../atoms/atoms'
-import { defaultModalState } from '../atoms/atomsValue'
+import useModal from '../hooks/useModal'
 
 const AddCardModal: React.FC = () => {
-  const [modal, setModal] = useRecoilState(modalState)
-  const toggle = () =>
-    setModal({
-      ...defaultModalState,
-    })
+  const { modal, setModalToggle } = useModal()
+  const toggle = () => setModalToggle()
   return (
     <div
       tabIndex={-1}
