@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React from 'react'
 import { useRecoilState } from 'recoil'
 import { conditionState } from '../atoms/atoms'
