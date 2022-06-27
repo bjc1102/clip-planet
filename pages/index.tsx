@@ -19,7 +19,7 @@ const Home: NextPage = () => {
   const FilterData = () => {
     if (cond.type === '키워드') {
       return cardList.map((v) => {
-        return v.title.includes(cond.type) && <Card key={v.id} {...v} />
+        return v.title.includes(cond.search) && <Card key={v.id} {...v} />
       })
     }
     if (cond.type === '즐겨찾기')
