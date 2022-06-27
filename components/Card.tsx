@@ -1,8 +1,7 @@
 import React from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 import _ from 'lodash'
 
-import { modalState } from '../atoms/atoms'
 import Pencil from './assets/Pencil'
 import Star from './assets/Star'
 import ICard from '../types/Card'

@@ -12,7 +12,7 @@ interface IButtonGroup {
 
 const ButtonGroup = () => {
   const condition = useRecoilValue(conditionState)
-  const { cond, setConditionUpdate } = useConditionUpdater()
+  const { setConditionUpdate } = useConditionUpdater()
   const buttonList: IButtonGroup[] = [
     {
       title: '즐겨찾기',
