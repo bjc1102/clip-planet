@@ -15,7 +15,9 @@ datasource db {
 //migrations => db를 실제로 만들어준다
 model Site {
   id    Int     @default(autoincrement()) @id
-  title String
-  content String
-  done Boolean? @default(false)
+  ogTitle String
+  ogDescription String
+  ogUrl String
+  ogImage String
 }
+
