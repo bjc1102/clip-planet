@@ -12,6 +12,7 @@ datasource db {
 }
 
 //만들려는 모델임
+//migrations => db를 실제로 만들어준다
 model Site {
   id    Int     @default(autoincrement()) @id
   title String
