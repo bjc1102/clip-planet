@@ -1,13 +1,18 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { SiteService } from 'src/site/service/site.service';
+import { SiteService } from 'src/app/service/site/site.service';
 
-@Controller('api/v1/sites')
+@Controller('/sites')
 export class SiteController {
   constructor(private readonly siteService: SiteService) {}
 
   @Post()
   async getSiteOG(@Body() data: { url: string }) {
     this.siteService.getOpenGraphData(data.url);
+  }
+
+  @Get()
+  async getReturnTest() {
+    return 'consoles';
   }
 
   // @Get()
