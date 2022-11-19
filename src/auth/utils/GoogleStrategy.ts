@@ -1,13 +1,10 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Profile, Strategy } from 'passport-google-oauth20';
-import { AuthService } from '../auth.service';
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
-  constructor(
-    @Inject('AUTH_SERVICE') private readonly authService: AuthService,
-  ) {
+  constructor() {
     super({
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -16,19 +13,14 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     });
   }
 
-  async validate(accessToken: string, refreshToken: string, profile: Profile) {
-    console.log(accessToken);
-    console.log(refreshToken);
-    console.log(profile);
-    //로그인하고 유저가 있는지 검증
-    const user = await this.authService.validateUser({
-      email: profile.emails[0].value,
-      Name: profile.displayName,
-    });
+  validate(accessToken: string, refreshToken: string, profile: Profile) {
+    const { id, displayName, emails } = profile;
 
-    console.log('validate');
-    console.log(user);
-
-    return user || null;
+    return {
+      provider: 'google',
+      providerId: id,
+      name: displayName,
+      email: emails[0].value,
+    };
   }
 }
