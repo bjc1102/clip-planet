@@ -10,4 +10,7 @@ export class User {
 
   @Column()
   Name: string;
+
+  @Column({ nullable: true })
+  refresh_token: string;
 }
