@@ -12,6 +12,7 @@
     "@octokit/core": "^3.6.0",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "axios": "^0.27.2",
+    "cookies-next": "^2.1.1",
     "eslint-config-prettier": "^8.5.0",
     "framer-motion": "^6.3.11",
     "lodash": "^4.17.21",
