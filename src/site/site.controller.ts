@@ -1,11 +1,14 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('/sites')
 @UseGuards(AuthGuard('jwt'))
 export class SiteController {
-  @Get()
-  async fetchSite() {
+  @Post()
+  async fetchSite(@Req() req: Request) {
+    //@ts-ignore
+    console.log(req.user);
     return 'hello';
   }
 }

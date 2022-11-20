@@ -1,4 +1,4 @@
-import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
 import { JwtPayload, UserDetails } from 'src/utils/types';
@@ -29,5 +29,23 @@ export class AuthController {
     res.cookie('refresh-token', refreshToken);
 
     res.redirect(process.env.DOMAIN);
+  }
+  @Post('refresh')
+  @UseGuards(AuthGuard('jwt-refresh'))
+  async refreshToken(@Req() req: Request, @Res() res: Response) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    const { refreshToken, email } = req.user as JwtPayload & {
+      refreshToken: string;
+    };
+
+    const user = await this.AuthService.findByRefreshToken(email, refreshToken);
+    const token = this.AuthService.getToken({ email });
+    await this.AuthService.updateRefreshToken(user, token.refreshToken);
+
+    res.cookie('access-token', token.accessToken);
+    res.cookie('refresh-token', token.refreshToken);
+
+    res.redirect('/');
   }
 }

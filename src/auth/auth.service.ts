@@ -38,5 +38,15 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
-  // async updateHashedRefreshToken() {}
+  async findByRefreshToken(email, refresh_token: string) {
+    return await this.userRepository.findOne({
+      where: { email, refresh_token },
+    });
+  }
+
+  async updateRefreshToken(user: User, refresh_token: string) {
+    user.refresh_token = refresh_token;
+
+    return await this.userRepository.save(user);
+  }
 }
