@@ -1,27 +1,14 @@
 import React from 'react'
-<<<<<<< HEAD
 
 const LoginButton = () => {
   const f3 = async () => {
     location.href = 'http://localhost:5000/api/auth/google/login'
-=======
-import GoogleIcon from 'public/assets/GoogleIcon'
-import axios from 'axios'
-
-const LoginButton = () => {
-  const onClick = async () => {
-    console.log(await axios.get('http://localhost:5000/auth'))
->>>>>>> 0433f48afebcecf44234ff463c0f71ff91625837
   }
 
   return (
     <button
       type="button"
-<<<<<<< HEAD
       onClick={f3}
-=======
-      onClick={onClick}
->>>>>>> 0433f48afebcecf44234ff463c0f71ff91625837
       className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2"
     >
       <svg
