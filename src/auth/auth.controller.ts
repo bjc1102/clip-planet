@@ -46,6 +46,6 @@ export class AuthController {
     res.cookie('access-token', token.accessToken);
     res.cookie('refresh-token', token.refreshToken);
 
-    res.redirect('/');
+    res.redirect(process.env.DOMAIN);
   }
 }
