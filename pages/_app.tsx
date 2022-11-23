@@ -2,8 +2,8 @@ import React from 'react'
 import Head from 'next/head'
 import '@/styles/global.css'
 import type { AppProps } from 'next/app'
-import { RecoilRoot } from 'recoil'
 import Nav from '@/components/Nav'
+import { RecoilRoot } from 'recoil'
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
   return (
@@ -11,8 +11,8 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+      <Nav />
       <RecoilRoot>
-        <Nav />
         <div className="min-h-screen overflow-hidden">
           <Component {...pageProps} />
         </div>
