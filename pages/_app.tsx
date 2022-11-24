@@ -3,7 +3,6 @@ import Head from 'next/head'
 import '@/styles/global.css'
 import type { AppProps } from 'next/app'
 import Nav from '@/components/Nav'
-import { RecoilRoot } from 'recoil'
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
   return (
@@ -12,11 +11,9 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Nav />
-      <RecoilRoot>
-        <div className="min-h-screen overflow-hidden">
-          <Component {...pageProps} />
-        </div>
-      </RecoilRoot>
+      <div className="min-h-screen overflow-hidden">
+        <Component {...pageProps} />
+      </div>
     </>
   )
 }
