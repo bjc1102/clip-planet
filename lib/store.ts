@@ -13,7 +13,10 @@ type MyPersist = (
 export const useTokenStore = create<Token>(
   (persist as MyPersist)(
     (set, get) => ({
-      refreshToken: localStorage.getItem('refresh-token') || '',
+      refreshToken:
+        typeof localStorage !== 'undefined'
+          ? localStorage.getItem('refresh-token') || ''
+          : '',
     }),
     {
       name: 'refresh-token', // name of item in the storage (must be unique)
