@@ -3,6 +3,7 @@ import { persist, PersistOptions } from 'zustand/middleware'
 
 interface Token {
   refreshToken: string
+  setRefreshToken: (RFtoken: string) => void
 }
 
 type MyPersist = (
@@ -14,6 +15,7 @@ export const useTokenStore = create<Token>(
   (persist as MyPersist)(
     (set, get) => ({
       refreshToken: '',
+      setRefreshToken: (RFtoken: string) => set({ refreshToken: RFtoken }),
     }),
     {
       name: 'refresh-token', // name of item in the storage (must be unique)
