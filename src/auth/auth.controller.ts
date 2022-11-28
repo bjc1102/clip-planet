@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
@@ -15,37 +16,45 @@ export class AuthController {
     return { msg: 'Google Authentication' };
   }
 
-  //api/auth/google/redirect
+  // api/auth/google/redirect
   @Get('google/redirect')
   @UseGuards(AuthGuard('google'))
   async handleRedirect(@Req() req: Request, @Res() res: Response) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
-    const user = await this.AuthService.validateUser(req.user as UserDetails);
-    const payload: JwtPayload = { email: user.email };
-
+    const payload: JwtPayload = { email: req.user.email };
     const { accessToken, refreshToken } = this.AuthService.getToken(payload);
+
+    const user = await this.AuthService.validateUser({
+      //@ts-ignore
+      ...req.user,
+      refreshToken,
+    } as UserDetails);
+
     res.cookie('access-token', accessToken);
     res.cookie('refresh-token', refreshToken);
 
     res.redirect(process.env.DOMAIN);
   }
+
+  // api/auth/refresh
   @Post('refresh')
   @UseGuards(AuthGuard('jwt-refresh'))
-  async refreshToken(@Req() req: Request, @Res() res: Response) {
+  async refreshToken(@Req() req: Request) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
-    const { refreshToken, email } = req.user as JwtPayload & {
-      refreshToken: string;
-    };
+    const { refreshToken, email } = req.user as JwtPayload;
 
-    const user = await this.AuthService.findByRefreshToken(email, refreshToken);
-    const token = this.AuthService.getToken({ email });
-    await this.AuthService.updateRefreshToken(user, token.refreshToken);
+    console.log(refreshToken, email);
 
-    res.cookie('access-token', token.accessToken);
-    res.cookie('refresh-token', token.refreshToken);
+    // const user = await this.AuthService.findByRefreshToken(email, refreshToken);
+    // const token = this.AuthService.getToken({ email });
+    // await this.AuthService.updateRefreshToken(user, token.refreshToken);
 
-    res.redirect(process.env.DOMAIN);
+    // res.cookie('access-token', token.accessToken);
+    // res.cookie('refresh-token', token.refreshToken);
+
+    // res.redirect(process.env.DOMAIN);
+
+    return 'hello';
   }
 }

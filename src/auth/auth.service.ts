@@ -16,11 +16,16 @@ export class AuthService {
     const user = await this.userRepository.findOneBy({
       email: googleUser.email,
     });
-    if (user) return user;
+    if (user) {
+      user.refresh_token = googleUser.refreshToken;
+      await this.userRepository.save(user);
+      return user;
+    }
+
     const newUser = this.userRepository.create({
       email: googleUser.email,
       Name: googleUser.name,
-      refresh_token: null,
+      refresh_token: googleUser.refreshToken,
     });
     return await this.userRepository.save(newUser);
   }
@@ -38,10 +43,11 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
-  async findByRefreshToken(email, refresh_token: string) {
-    return await this.userRepository.findOne({
-      where: { email, refresh_token },
+  async findByRefreshToken(email: string, refresh_token: string) {
+    const user = await this.userRepository.findOneBy({
+      email,
     });
+    return user;
   }
 
   async updateRefreshToken(user: User, refresh_token: string) {

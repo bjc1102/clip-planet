@@ -3,6 +3,7 @@ export type UserDetails = {
   providerId: any;
   name: string;
   email: string;
+  refreshToken: string;
 
   // provider: 'google',
   // providerId: id,
