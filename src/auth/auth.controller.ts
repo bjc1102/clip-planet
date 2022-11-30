@@ -2,6 +2,8 @@
 import { Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
+import expire from 'src/utils/getExpires';
+import twoWeek from 'src/utils/getExpires';
 import { JwtPayload, UserDetails } from 'src/utils/types';
 import { AuthService } from './auth.service';
 
@@ -31,7 +33,9 @@ export class AuthController {
     } as UserDetails);
 
     res.cookie('access-token', accessToken);
-    res.cookie('refresh-token', refreshToken);
+    res.cookie('refresh-token', refreshToken, {
+      expires: expire(),
+    });
 
     res.redirect(process.env.DOMAIN);
   }
@@ -39,22 +43,23 @@ export class AuthController {
   // api/auth/refresh
   @Post('refresh')
   @UseGuards(AuthGuard('jwt-refresh'))
-  async refreshToken(@Req() req: Request) {
+  async refreshToken(
+    @Req() req: Request,
+    @Res({ passthrough: true }) response: Response,
+  ) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     const { refreshToken, email } = req.user as JwtPayload;
 
-    console.log(refreshToken, email);
+    const user = await this.AuthService.findByRefreshToken(email, refreshToken);
+    const token = this.AuthService.getToken({ email });
+    await this.AuthService.updateRefreshToken(user, token.refreshToken);
 
-    // const user = await this.AuthService.findByRefreshToken(email, refreshToken);
-    // const token = this.AuthService.getToken({ email });
-    // await this.AuthService.updateRefreshToken(user, token.refreshToken);
+    response.cookie('access-token', token.accessToken);
+    response.cookie('refresh-token', token.refreshToken, {
+      expires: expire(),
+    });
 
-    // res.cookie('access-token', token.accessToken);
-    // res.cookie('refresh-token', token.refreshToken);
-
-    // res.redirect(process.env.DOMAIN);
-
-    return 'hello';
+    response.send({ message: 'success' });
   }
 }
