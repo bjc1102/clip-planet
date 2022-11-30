@@ -14,7 +14,6 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Nav />
       <div className="min-h-screen overflow-hidden">
         <Component {...pageProps} />
       </div>
