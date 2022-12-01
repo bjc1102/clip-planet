@@ -17,6 +17,9 @@ const Axios = {
     )
     return res.status === 201
   },
+  setSiteInfo: async (url: string) => {
+    return await instance.post('api/sites', { url })
+  },
 }
 
 export default Axios

@@ -18,7 +18,7 @@ interface HeaderType extends AxiosRequestHeaders {
 instance.interceptors.request.use(
   (config) => {
     const headers = config.headers as HeaderType
-    const token = getCookie('token') ?? ''
+    const token = getCookie('access-token') ?? ''
 
     if (token) {
       headers['Content-Type'] = 'application/json'
