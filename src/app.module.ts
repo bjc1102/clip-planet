@@ -3,8 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './typeorm/User';
-import { SiteController } from './site/site.controller';
-import { AuthController } from './auth/auth.controller';
+import { SiteModule } from './site/site.module';
 
 @Module({
   imports: [
@@ -20,8 +19,9 @@ import { AuthController } from './auth/auth.controller';
       entities: [User],
       synchronize: true,
     }),
+    SiteModule,
   ],
-  controllers: [SiteController],
+  controllers: [],
   providers: [],
 })
 export class AppModule {}
