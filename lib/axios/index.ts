@@ -1,3 +1,4 @@
+import { parsingAuthorization } from '@/utils/parsingToken'
 import axios, { AxiosRequestHeaders } from 'axios'
 import { getCookie } from 'cookies-next'
 import Axios from './instance'
@@ -5,6 +6,7 @@ import Axios from './instance'
 const instance = axios.create({
   baseURL: 'http://localhost:5000/',
   timeout: 5000,
+  withCredentials: true,
 })
 
 export default instance
@@ -22,7 +24,7 @@ instance.interceptors.request.use(
 
     if (token) {
       headers['Content-Type'] = 'application/json'
-      headers.Authorization = `${token}`
+      headers.Authorization = parsingAuthorization(token)
     }
     return config
   },

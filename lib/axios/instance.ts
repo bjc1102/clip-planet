@@ -1,19 +1,24 @@
-import axios from 'axios'
+import { parsingAuthorization } from '@/utils/parsingToken'
+import axios, { AxiosRequestConfig } from 'axios'
 import { getCookie } from 'cookies-next'
 import instance from '.'
 
+const setHeaders = (): AxiosRequestConfig => {
+  const refreshToken = getCookie('refresh-token')
+
+  return {
+    headers: {
+      Authorization: parsingAuthorization(refreshToken),
+    },
+  }
+}
+
 const Axios = {
   setRefreshToken: async () => {
-    const refreshToken = getCookie('refresh-token')
     const res = await axios.post(
       'http://localhost:5000/api/auth/refresh',
       {},
-      {
-        withCredentials: true,
-        headers: {
-          Authorization: `Bearer ${refreshToken}`,
-        },
-      }
+      setHeaders()
     )
     return res.status === 201
   },

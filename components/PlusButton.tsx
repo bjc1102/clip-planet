@@ -1,10 +1,12 @@
+import Axios from 'lib/axios/instance'
 import React from 'react'
 
 const PlusButton = () => {
   // const onClick = () => {}
   const [url, setUrl] = React.useState('')
-  const onClick = (e: React.SyntheticEvent) => {
+  const onClick = async (e: React.SyntheticEvent) => {
     console.log('button')
+    console.log(await Axios.setSiteInfo(url))
   }
   const onChange = (e: React.SyntheticEvent) => {
     //@ts-ignore
@@ -12,10 +14,12 @@ const PlusButton = () => {
   }
 
   return (
-    <button onClick={onClick} className="">
-      <span>추가!</span>
-      <input type="url" onChange={onChange} />
-    </button>
+    <>
+      <button onClick={onClick} className="">
+        버튼입니다
+      </button>
+      <input type="url" onChange={onChange} className="outline" />
+    </>
   )
 }
 
