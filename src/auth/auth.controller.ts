@@ -3,7 +3,6 @@ import { Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
 import expire from 'src/utils/getExpires';
-import twoWeek from 'src/utils/getExpires';
 import { JwtPayload, UserDetails } from 'src/utils/types';
 import { AuthService } from './auth.service';
 
