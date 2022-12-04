@@ -5,12 +5,12 @@ const PlusButton = () => {
   // const onClick = () => {}
   const [url, setUrl] = React.useState('')
   const onClick = async (e: React.SyntheticEvent) => {
-    console.log('button')
+    console.log(url)
     console.log(await Axios.setSiteInfo(url))
   }
   const onChange = (e: React.SyntheticEvent) => {
     //@ts-ignore
-    console.log(e.target.value)
+    setUrl(e.target.value)
   }
 
   return (

@@ -18,12 +18,12 @@ const Axios = {
     const res = await axios.post(
       'http://localhost:5000/api/auth/refresh',
       {},
-      setHeaders()
+      { ...setHeaders(), withCredentials: true }
     )
     return res.status === 201
   },
   setSiteInfo: async (url: string) => {
-    return await instance.post('api/sites', { url })
+    return await instance.post('api/sites', { siteURL: url })
   },
 }
 
