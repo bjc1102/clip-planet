@@ -31,9 +31,11 @@ export class AuthController {
       refreshToken,
     } as UserDetails);
 
-    res.cookie('access-token', accessToken);
+    res.cookie('access-token', accessToken, {
+      expires: expire('token'),
+    });
     res.cookie('refresh-token', refreshToken, {
-      expires: expire(),
+      expires: expire('refresh-token'),
     });
 
     res.redirect(process.env.DOMAIN);
@@ -54,9 +56,11 @@ export class AuthController {
     const token = this.AuthService.getToken({ email });
     await this.AuthService.updateRefreshToken(user, token.refreshToken);
 
-    response.cookie('access-token', token.accessToken);
+    response.cookie('access-token', token.accessToken, {
+      expires: expire('token'),
+    });
     response.cookie('refresh-token', token.refreshToken, {
-      expires: expire(),
+      expires: expire('refresh-token'),
     });
 
     response.send({ message: 'success' });
