@@ -3,8 +3,10 @@ import axios, { AxiosRequestHeaders } from 'axios'
 import { getCookie } from 'cookies-next'
 import Axios from './instance'
 
+export const baseURL = 'http://localhost:5000/'
+
 const instance = axios.create({
-  baseURL: 'http://localhost:5000/',
+  baseURL: baseURL,
   timeout: 5000,
   withCredentials: true,
 })
