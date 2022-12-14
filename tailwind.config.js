@@ -7,8 +7,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bgColor: '#0A192F',
-        accent: '	#FFCE55',
+        inherit: 'inherit',
+        primary1: '#212354',
+        primary2: '#3E54E8',
+        primary3: '#3E66F9',
+        primary4: '#6081FF',
+        primary5: '#89F3FF',
         white: '#ffffff',
         blue: {
           100: '#E3F2FD',
