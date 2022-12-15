@@ -16,7 +16,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Sidebar />
-      <main className="min-h-screen">
+      <main className={`min-h-screen ml-[240px] px-5`}>
         {!isToken && <Login />}
         <MainContent />
       </main>

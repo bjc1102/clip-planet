@@ -9,7 +9,7 @@ const Card = () => {
   return (
     <div
       onClick={openInNewTab()}
-      className="max-w-[300px] hover:cursor-pointer border rounded-lg shadow-md bg-gray-800 border-gray-700"
+      className="max-w-[280px] hover:cursor-pointer border rounded-lg shadow-md bg-gray-800 border-gray-700"
     >
       <div className="p-10 w-full h-40 bg-[url('https://avatars.githubusercontent.com/u/71929440?v=4?s=400')] bg-no-repeat bg-center bg-cover">
         {/* eslint-disable-next-line @next/next/no-img-element */}

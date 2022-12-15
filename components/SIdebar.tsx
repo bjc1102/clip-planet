@@ -1,9 +1,14 @@
 import React from 'react'
 import Icon from 'public/assets/Icon'
+import useWindowSize from '@/hooks/useWindowSize'
 
-const SIdebar = () => {
+const Sidebar = () => {
+  const { windowSize } = useWindowSize()
+
+  console.log(windowSize.width)
+
   return (
-    <aside className="relative w-64" aria-label="Sidebar">
+    <aside className="relative max-w-fit" aria-label="Sidebar">
       <div className="min-h-full fixed w-60 overflow-y-auto py-4 px-3 bg-primaryColor2">
         <a
           href="https://flowbite.com/"
@@ -83,4 +88,4 @@ const SIdebar = () => {
   )
 }
 
-export default SIdebar
+export default Sidebar
