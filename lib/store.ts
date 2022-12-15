@@ -12,3 +12,16 @@ export const useTokenStore = create<Token>((set) => ({
     set(() => ({ token: isToken }))
   },
 }))
+
+interface Width {
+  sWidth: number
+  setSWidth: (width: number) => void
+}
+
+export const useWidthStore = create<Width>((set) => ({
+  sWidth: 240,
+  setSWidth: (width) =>
+    set(() => ({
+      sWidth: width,
+    })),
+}))
