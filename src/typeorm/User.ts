@@ -1,5 +1,5 @@
 import { PrimaryGeneratedColumn, Entity, Column, OneToMany } from 'typeorm';
-import { SiteInfo } from './SiteInfo';
+// import { SiteInfo } from './SiteInfo';
 
 @Entity({ name: 'users' })
 export class User {
@@ -15,6 +15,6 @@ export class User {
   @Column({ nullable: true })
   refresh_token: string;
 
-  @OneToMany((type) => SiteInfo, (siteinfo) => siteinfo.user)
-  photos: SiteInfo[];
+  // @OneToMany((type) => SiteInfo, (siteinfo) => siteinfo.user)
+  // photos: SiteInfo[];
 }
