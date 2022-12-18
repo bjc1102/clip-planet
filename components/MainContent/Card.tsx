@@ -1,5 +1,7 @@
-import sliceString from '@/utils/sliceString'
 import React from 'react'
+
+import sliceString from '@/utils/sliceString'
+import CardMenuBar from '@/components/MainContent/CardMenuBar'
 
 const Card = () => {
   const openInNewTab = (url?: string) => () => {
@@ -9,14 +11,22 @@ const Card = () => {
   return (
     <div
       onClick={openInNewTab()}
-      className="max-w-[280px] hover:cursor-pointer border rounded-lg shadow-md bg-gray-800 border-gray-700"
+      className="group max-w-[280px] overflow-hidden hover:cursor-pointer"
     >
-      <div className="p-10 w-full h-40 bg-[url('https://avatars.githubusercontent.com/u/71929440?v=4?s=400')] bg-no-repeat bg-center bg-cover">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+      <div className="group-hover:shadow-[inset_0_-55px_75px_-55px_rgba(0,0,0,1)] relative py-20 rounded-lg bg-[url('https://avatars.githubusercontent.com/u/71929440?v=4?s=400')] bg-no-repeat bg-center bg-cover">
+        <div className="absolute group-hover:text-white bottom-2 px-2">
+          <CardMenuBar />
+        </div>
       </div>
-      <div className="p-5">
-        <h5 className="mb-2 text-sm font-bold tracking-tight text-accentColor2">
-          {sliceString('Noteworthy technology acquisitions 2021', 20)}
+      <div className="flex gap-2 items-center pt-3">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://www.techinterviewhandbook.org/img/favicon.png"
+          alt="site-favicon"
+          className="w-5 h-5 bg-white bg-opacity-0 object-cover rounded-md overflow-clip"
+        />
+        <h5 className="text-base font-semibold tracking-tight text-accentColor2 group-hover:text-gray-500">
+          {sliceString('Noteworthy technology acquisitions 2021', 26)}
         </h5>
       </div>
     </div>
