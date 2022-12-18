@@ -1,5 +1,5 @@
 import Directory from 'public/assets/Directory'
-import Star from 'public/assets/star'
+import Star from 'public/assets/Star'
 import React from 'react'
 import MenuBarBtn from '@/components/MainContent/MenuBarBtn'
 
