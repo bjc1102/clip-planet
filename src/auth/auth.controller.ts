@@ -62,7 +62,7 @@ export class AuthController {
 
     const user = await this.AuthService.findByRefreshToken(email, refreshToken);
     const token = this.AuthService.getToken({ id, email });
-    await this.AuthService.updateRefreshToken(userInfo, token.refreshToken);
+    await this.AuthService.updateRefreshToken(user[0], token.refreshToken);
 
     response.cookie('access-token', token.accessToken, {
       expires: expire('token'),
