@@ -3,9 +3,7 @@ import Icon from 'public/assets/Icon'
 import useWindowSize from '@/hooks/useWindowSize'
 
 const Sidebar = () => {
-  const { windowSize } = useWindowSize()
-
-  console.log(windowSize.width)
+  // const { windowSize } = useWindowSize()
 
   return (
     <aside className="relative max-w-fit" aria-label="Sidebar">

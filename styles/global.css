@@ -9,7 +9,4 @@
   .theme-container {
     @apply container bg-gray-700;
   }
-  .CardMenu-Btn {
-    @apply flex justify-center p-1 items-center text-gray-500 rounded-lg border border-primaryColor1 shadow-sm hover:text-white dark:text-gray-400 bg-primaryColor1 hover:bg-primaryColor2 focus:ring-4 focus:outline-none focus:ring-gray-400;
-  }
 }
