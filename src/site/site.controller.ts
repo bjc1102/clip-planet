@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { User } from 'src/database/User.entity';
+import { UserDecorator } from 'src/types/user.decorator';
 import { SiteService } from './site.service';
 
 // api/sites
@@ -10,13 +12,17 @@ export class SiteController {
 
   @Post()
   @UseGuards(AuthGuard('jwt'))
-  async fetchSite(@Req() req: Request) {
+  async fetchSite(@Req() req: Request, @UserDecorator() userInfo: User) {
+    const { id, email } = userInfo;
     //@ts-ignore
-    console.log(req.user);
-    //@ts-ignore
-    // const siteURL = req.body.siteURL;
-    // this.siteService.getOpenGraphData(siteURL);
+    const siteURL = req.body.siteURL;
 
-    return 'hello';
+    try {
+      if (!siteURL) throw new Error('url을 찾을 수 없습니다.');
+      this.siteService.getOpenGraphData(siteURL);
+      return 'hello';
+    } catch (error) {
+      return error;
+    }
   }
 }

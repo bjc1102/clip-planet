@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Site } from 'src/database/site.entity';
 import { SiteController } from './site.controller';
 import { SiteService } from './site.service';
 
 @Module({
-  imports: [],
+  imports: [TypeOrmModule.forFeature([Site])],
   controllers: [SiteController],
   providers: [SiteService],
 })
