@@ -12,9 +12,10 @@ export class SiteController {
   @UseGuards(AuthGuard('jwt'))
   async fetchSite(@Req() req: Request) {
     //@ts-ignore
-    const siteURL = req.body.siteURL;
-
-    this.siteService.getOpenGraphData(siteURL);
+    console.log(req.user);
+    //@ts-ignore
+    // const siteURL = req.body.siteURL;
+    // this.siteService.getOpenGraphData(siteURL);
 
     return 'hello';
   }

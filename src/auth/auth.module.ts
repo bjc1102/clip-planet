@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GoogleStrategy } from './utils/GoogleStrategy';
-import { User } from 'src/typeorm/User';
+import { User } from 'src/database/User.entity';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { AtStrategy } from './utils/TokenStrategy';

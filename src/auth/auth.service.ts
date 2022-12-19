@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtPayload, UserDetails } from 'src/utils/types';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/typeorm/User';
+import { User } from 'src/database/User.entity';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -17,7 +17,6 @@ export class AuthService {
       email: googleUser.email,
     });
     if (user) {
-      user.refresh_token = googleUser.refreshToken;
       await this.userRepository.save(user);
       return user;
     }
@@ -25,7 +24,6 @@ export class AuthService {
     const newUser = this.userRepository.create({
       email: googleUser.email,
       Name: googleUser.name,
-      refresh_token: googleUser.refreshToken,
     });
     return await this.userRepository.save(newUser);
   }

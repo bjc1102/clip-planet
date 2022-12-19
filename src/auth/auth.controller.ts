@@ -22,14 +22,19 @@ export class AuthController {
   @UseGuards(AuthGuard('google'))
   async handleRedirect(@Req() req: Request, @Res() res: Response) {
     //@ts-ignore
-    const payload: JwtPayload = { email: req.user.email };
-    const { accessToken, refreshToken } = this.AuthService.getToken(payload);
 
     const user = await this.AuthService.validateUser({
       //@ts-ignore
       ...req.user,
-      refreshToken,
     } as UserDetails);
+
+    //유저 정보로 jwt 토큰 생성하기
+    const payload: JwtPayload = {
+      id: user.id,
+      email: user.email,
+    };
+
+    const { accessToken, refreshToken } = this.AuthService.getToken(payload);
 
     res.cookie('access-token', accessToken, {
       expires: expire('token'),
@@ -53,7 +58,7 @@ export class AuthController {
     const { refreshToken, email } = req.user as JwtPayload;
 
     const user = await this.AuthService.findByRefreshToken(email, refreshToken);
-    const token = this.AuthService.getToken({ email });
+    const token = this.AuthService.getToken(user);
     await this.AuthService.updateRefreshToken(user, token.refreshToken);
 
     response.cookie('access-token', token.accessToken, {

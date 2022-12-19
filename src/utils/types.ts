@@ -12,5 +12,6 @@ export type UserDetails = {
 };
 
 export type JwtPayload = {
+  id: number;
   email: string;
 };
