@@ -42,8 +42,11 @@ export class AuthService {
   }
 
   async findByRefreshToken(email: string, refresh_token: string) {
-    const user = await this.userRepository.findOneBy({
-      email,
+    const user = await this.userRepository.find({
+      where: {
+        email,
+        refresh_token,
+      },
     });
     return user;
   }
