@@ -3,7 +3,7 @@ import axios, { AxiosRequestHeaders } from 'axios'
 import { getCookie } from 'cookies-next'
 import Axios from './instance'
 
-export const baseURL = 'http://localhost:5000/'
+export const baseURL = 'http://localhost:5000/api/'
 
 const instance = axios.create({
   baseURL: baseURL,

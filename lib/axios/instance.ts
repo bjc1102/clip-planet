@@ -17,14 +17,14 @@ const setHeaders = (): AxiosRequestConfig => {
 const Axios = {
   setRefreshToken: async () => {
     const res = await axios.post(
-      `${baseURL}api/auth/refresh`,
+      `${baseURL}auth/refresh`,
       {},
       { ...setHeaders() }
     )
     return res.status === 201
   },
-  setSiteInfo: async (url: string) => {
-    return await instance.post('api/sites', { siteURL: url })
+  setSiteUrl: async (url: string) => {
+    return await instance.post('sites', { siteURL: url })
   },
 }
 

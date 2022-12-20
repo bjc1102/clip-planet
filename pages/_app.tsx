@@ -2,15 +2,20 @@ import React from 'react'
 import Head from 'next/head'
 import '@/styles/global.css'
 import type { AppProps } from 'next/app'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
+  const [queryClient] = React.useState(() => new QueryClient())
+
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div className="min-h-screen bg-primaryColor1">
-        <Component {...pageProps} />
+        <QueryClientProvider client={queryClient}>
+          <Component {...pageProps} />
+        </QueryClientProvider>
       </div>
     </>
   )
