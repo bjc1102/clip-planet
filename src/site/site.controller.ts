@@ -19,7 +19,9 @@ export class SiteController {
 
     try {
       if (!siteURL) throw new Error('url을 찾을 수 없습니다.');
-      this.siteService.getOpenGraphData(siteURL);
+      console.log(
+        await this.siteService.getOpenGraphData(siteURL, { id, email }),
+      );
       return 'hello';
     } catch (error) {
       return error;
