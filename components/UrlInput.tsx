@@ -1,12 +1,28 @@
+import useFetchUrl from '@/hooks/useFetchUrl'
 import React from 'react'
 
-const Input = () => {
+const UrlInput = () => {
   const [url, setUrl] = React.useState('')
+  const [error, setError] = React.useState('')
+  const { data, refetch } = useFetchUrl(url)
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.currentTarget.value)
     setUrl(e.currentTarget.value)
   }
+  const onSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault()
+    const reg =
+      /((?:(?:http?|ftp)[s]*:\/\/)?[a-z0-9-%\/\&=?\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?)/gi
+
+    if (!url.length) setError('URL을 입력해주세요')
+    else if (!reg.test(url)) setError('URL형식이 아닙니다.')
+    else {
+      setError('')
+      refetch()
+    }
+  }
+
   return (
     <>
       <label
@@ -34,21 +50,23 @@ const Input = () => {
           </svg>
         </div>
         <input
+          onChange={onChange}
           type="url"
           className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="URL 저장하기"
-          onChange={onChange}
           required
         />
         <button
+          onClick={onSubmit}
           type="submit"
-          className="text-white absolute right-2.5 bottom-2.5 bg-blue-600 hover:bg-accentColor1 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
+          className="text-white absolute right-2.5 bottom-2.5 bg-blue-600 hover:bg-accentColor1 hover:text-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
         >
           추가하기
         </button>
       </div>
+      <span className="text-red-600">{error}</span>
     </>
   )
 }
 
-export default Input
+export default UrlInput

@@ -1,11 +1,11 @@
 import React from 'react'
 import CardList from '@/components/MainContent/CardList'
-import Input from '@/components/Input'
+import UrlInput from '@/components/UrlInput'
 
 const MainContent = () => {
   return (
     <div>
-      <Input />
+      <UrlInput />
       <CardList />
     </div>
   )
