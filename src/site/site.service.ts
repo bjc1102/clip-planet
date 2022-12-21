@@ -15,10 +15,10 @@ export class SiteService {
     const options = { url };
 
     return ogs(options).then(async (data) => {
-      const { error, result } = data;
+      const { error, result: ogData } = data;
 
-      if (!error && result.success) {
-        const { ogTitle, ogUrl, ogImage } = result;
+      if (!error && ogData.success) {
+        const { ogTitle, ogUrl, ogImage } = ogData;
 
         const ogResult = this.siteRepository.create({
           ogTitle: ogTitle,
@@ -26,11 +26,12 @@ export class SiteService {
           ogImage: ogImage['url'],
           user: userInfo,
         });
+        const result = await this.siteRepository.save(ogResult);
 
-        return await this.siteRepository.save(ogResult);
+        return { result, error };
       }
 
-      return error;
+      return { result: ogData, error };
     });
   }
 }

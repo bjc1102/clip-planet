@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Controller, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  HttpException,
+  HttpStatus,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from 'src/database/User.entity';
 import { UserDecorator } from 'src/types/user.decorator';
@@ -18,13 +25,19 @@ export class SiteController {
     const siteURL = req.body.siteURL;
 
     try {
-      if (!siteURL) throw new Error('url을 찾을 수 없습니다.');
-      console.log(
-        await this.siteService.getOpenGraphData(siteURL, { id, email }),
+      if (!siteURL) throw new Error('url 정보가 없습니다.');
+      const { result, error } = await this.siteService.getOpenGraphData(
+        siteURL,
+        { id, email },
       );
-      return 'hello';
+      if (error) throw new Error('open graph 정보를 불러올 수 없습니다.');
+      return {
+        ogTitle: result['ogTitle'],
+        ogUrl: result['ogUrl'],
+        ogImage: result['ogImage'],
+      };
     } catch (error) {
-      return error;
+      throw new HttpException(error, HttpStatus.FORBIDDEN);
     }
   }
 }
