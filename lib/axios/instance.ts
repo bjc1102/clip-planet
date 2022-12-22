@@ -23,7 +23,7 @@ const Axios = {
     )
     return res.status === 201
   },
-  setSiteUrl: async (url: string) => {
+  setClip: async (url: string) => {
     return await instance.post('sites', { siteURL: url })
   },
 }

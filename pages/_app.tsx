@@ -3,9 +3,11 @@ import Head from 'next/head'
 import '@/styles/global.css'
 import type { AppProps } from 'next/app'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import useLogin from '@/hooks/useLogin'
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(() => new QueryClient())
+  const isToken = useLogin()
 
   return (
     <>
