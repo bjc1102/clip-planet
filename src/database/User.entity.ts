@@ -18,6 +18,9 @@ export class User {
   @Column()
   Name: string;
 
+  @Column()
+  imageUrl: string;
+
   @Column({ nullable: true })
   refresh_token: string;
 

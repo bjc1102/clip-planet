@@ -16,14 +16,19 @@ export class AuthService {
     const user = await this.userRepository.findOneBy({
       email: googleUser.email,
     });
+
     if (user) {
-      await this.userRepository.save(user);
+      await this.userRepository.save({
+        ...user,
+        imageUrl: googleUser.imageUrl,
+      });
       return user;
     }
 
     const newUser = this.userRepository.create({
       email: googleUser.email,
       Name: googleUser.name,
+      imageUrl: googleUser.imageUrl,
     });
     return await this.userRepository.save(newUser);
   }
