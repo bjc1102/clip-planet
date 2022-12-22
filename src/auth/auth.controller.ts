@@ -39,6 +39,10 @@ export class AuthController {
     };
 
     const { accessToken, refreshToken } = this.AuthService.getToken(payload);
+    const setRefreshToken = await this.AuthService.updateRefreshToken(
+      user,
+      refreshToken,
+    );
 
     res.cookie('access-token', accessToken, {
       expires: expire('token'),
