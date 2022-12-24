@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/database/User.entity';
 import { JwtService } from '@nestjs/jwt';
+import { pbkdf2Sync } from 'crypto';
 
 @Injectable()
 export class AuthService {
@@ -25,10 +26,19 @@ export class AuthService {
       return user;
     }
 
+    const api_key = pbkdf2Sync(
+      googleUser.email,
+      process.env.API_SECRET,
+      1,
+      32,
+      'sha512',
+    ).toString('base64');
+
     const newUser = this.userRepository.create({
       email: googleUser.email,
       Name: googleUser.name,
       imageUrl: googleUser.imageUrl,
+      api_key,
     });
     return await this.userRepository.save(newUser);
   }
@@ -60,5 +70,9 @@ export class AuthService {
     user.refresh_token = refresh_token;
 
     return await this.userRepository.save(user);
+  }
+
+  async findUser(id: number, email: string) {
+    return await this.userRepository.findOne({ where: { id, email } });
   }
 }

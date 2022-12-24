@@ -24,6 +24,9 @@ export class User {
   @Column({ nullable: true })
   refresh_token: string;
 
+  @Column()
+  api_key: string;
+
   @OneToMany(() => Site, (site) => site.user)
   Sites: Site[];
 }

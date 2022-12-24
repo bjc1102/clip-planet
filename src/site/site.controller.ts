@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import {
   Controller,
+  Get,
+  Post,
   HttpException,
   HttpStatus,
-  Post,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -17,7 +18,7 @@ import { SiteService } from './site.service';
 export class SiteController {
   constructor(private readonly siteService: SiteService) {}
 
-  @Post()
+  @Post('set/clip')
   @UseGuards(AuthGuard('jwt'))
   async fetchSite(@Req() req: Request, @UserDecorator() userInfo: User) {
     const { id, email } = userInfo;
@@ -26,7 +27,7 @@ export class SiteController {
 
     try {
       if (!siteURL) throw new Error('url 정보가 없습니다.');
-      const { result, error } = await this.siteService.getOpenGraphData(
+      const { result, error } = await this.siteService.setOpenGraphData(
         siteURL,
         { id, email },
       );
@@ -39,5 +40,14 @@ export class SiteController {
     } catch (error) {
       throw new HttpException(error, HttpStatus.FORBIDDEN);
     }
+  }
+
+  @Get('get/clips')
+  @UseGuards(AuthGuard('jwt'))
+  async getUserSite(@UserDecorator() userInfo: User) {
+    const { id, email } = userInfo;
+
+    const clips = await this.siteService.getOpenGraphData(id, email);
+    return clips;
   }
 }

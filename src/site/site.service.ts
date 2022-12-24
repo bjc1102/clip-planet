@@ -8,10 +8,13 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class SiteService {
   constructor(
-    @InjectRepository(Site) private readonly siteRepository: Repository<Site>,
+    @InjectRepository(Site)
+    private readonly siteRepository: Repository<Site>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>,
   ) {}
 
-  async getOpenGraphData(url: string, userInfo: Partial<User>) {
+  async setOpenGraphData(url: string, userInfo: Partial<User>) {
     const options = { url };
 
     return ogs(options).then(async (data) => {
@@ -32,6 +35,14 @@ export class SiteService {
       }
 
       return { result: ogData, error };
+    });
+  }
+  async getOpenGraphData(id: number, email: string) {
+    return await this.siteRepository.findBy({
+      user: {
+        id,
+        email,
+      },
     });
   }
 }

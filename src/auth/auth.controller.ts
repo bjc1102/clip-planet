@@ -39,10 +39,7 @@ export class AuthController {
     };
 
     const { accessToken, refreshToken } = this.AuthService.getToken(payload);
-    const setRefreshToken = await this.AuthService.updateRefreshToken(
-      user,
-      refreshToken,
-    );
+    await this.AuthService.updateRefreshToken(user, refreshToken);
 
     res.cookie('access-token', accessToken, {
       expires: expire('token'),
@@ -76,5 +73,18 @@ export class AuthController {
     });
 
     response.send({ message: 'success' });
+  }
+
+  @Get('user')
+  @UseGuards(AuthGuard('jwt'))
+  async getUserData(@UserDecorator() userInfo: User) {
+    const { email, id } = userInfo as JwtPayload;
+    const {
+      email: userEmail,
+      imageUrl,
+      Name: name,
+    } = await this.AuthService.findUser(id, email);
+
+    return { userEmail, imageUrl, name };
   }
 }
