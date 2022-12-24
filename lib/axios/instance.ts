@@ -24,7 +24,7 @@ const Axios = {
     return res.status === 201
   },
   setClip: async (url: string) => {
-    return await instance.post('sites', { siteURL: url })
+    return await instance.post('/sites/set/clip', { siteURL: url })
   },
 }
 
