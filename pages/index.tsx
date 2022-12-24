@@ -2,7 +2,6 @@ import React from 'react'
 import { NextPage } from 'next'
 import MainContent from '@/components/MainContent'
 import Header from '@/components/Header'
-import UrlInput from '@/components/GatheringInputBox/GatheringInput'
 
 const Home: NextPage = () => {
   return (

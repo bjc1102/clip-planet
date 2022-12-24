@@ -14,7 +14,7 @@ const GatheringInput = () => {
   const [type, setType] = React.useState<selectType>('검색')
   const [error, setError] = React.useState('')
   const [isOpen, setOpen] = React.useState(false)
-  const { refetch } = useSetClip(url)
+  const { data, refetch } = useSetClip(url)
   const ref = React.useRef<HTMLDivElement>(null)
   const close = useOutsideClick(ref, () => setOpen(false))
 
@@ -33,6 +33,8 @@ const GatheringInput = () => {
       setError('')
       refetch()
     }
+
+    console.log(data)
   }
   const selectType = (InputType: selectType) => {
     return () => {
