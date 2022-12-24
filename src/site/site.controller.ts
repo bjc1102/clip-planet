@@ -20,23 +20,29 @@ export class SiteController {
 
   @Post('set/clip')
   @UseGuards(AuthGuard('jwt'))
-  async fetchSite(@Req() req: Request, @UserDecorator() userInfo: User) {
+  async setOpenGraph(@Req() req: Request, @UserDecorator() userInfo: User) {
     const { id, email } = userInfo;
     //@ts-ignore
     const siteURL = req.body.siteURL;
 
     try {
       if (!siteURL) throw new Error('url 정보가 없습니다.');
-      const { result, error } = await this.siteService.setOpenGraphData(
+      const { ogData, error } = await this.siteService.fetchOpenGraphData(
         siteURL,
-        { id, email },
       );
+      if (!error && ogData.success) {
+        const result = await this.siteService.saveUserOpenGraphData(ogData, {
+          id,
+          email,
+        });
+        return {
+          ogTitle: result.ogTitle,
+          ogImage: result.ogImage,
+          ogUrl: result.ogUrl,
+        };
+      }
       if (error) throw new Error('open graph 정보를 불러올 수 없습니다.');
-      return {
-        ogTitle: result['ogTitle'],
-        ogUrl: result['ogUrl'],
-        ogImage: result['ogImage'],
-      };
+      return '성공';
     } catch (error) {
       throw new HttpException(error, HttpStatus.FORBIDDEN);
     }
@@ -47,7 +53,7 @@ export class SiteController {
   async getUserSite(@UserDecorator() userInfo: User) {
     const { id, email } = userInfo;
 
-    const clips = await this.siteService.getOpenGraphData(id, email);
+    const clips = await this.siteService.getUserOpenGraphData(id, email);
     return clips;
   }
 }

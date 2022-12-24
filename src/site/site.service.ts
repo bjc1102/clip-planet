@@ -14,30 +14,33 @@ export class SiteService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  async setOpenGraphData(url: string, userInfo: Partial<User>) {
+  async fetchOpenGraphData(url: string) {
     const options = { url };
 
     return ogs(options).then(async (data) => {
       const { error, result: ogData } = data;
 
-      if (!error && ogData.success) {
-        const { ogTitle, ogUrl, ogImage } = ogData;
-
-        const ogResult = this.siteRepository.create({
-          ogTitle: ogTitle,
-          ogUrl: ogUrl,
-          ogImage: ogImage['url'],
-          user: userInfo,
-        });
-        const result = await this.siteRepository.save(ogResult);
-
-        return { result, error };
-      }
-
-      return { result: ogData, error };
+      return { ogData, error };
     });
   }
-  async getOpenGraphData(id: number, email: string) {
+
+  async saveUserOpenGraphData(
+    ogData: ogs.SuccessResult['result'],
+    { id, email }: Partial<User>,
+  ) {
+    const { ogTitle, ogImage, ogUrl } = ogData;
+
+    const ogResult = this.siteRepository.create({
+      ogTitle: ogTitle,
+      ogUrl: ogUrl,
+      ogImage: ogImage['url'],
+      user: { id, email },
+    });
+
+    return this.siteRepository.save(ogResult);
+  }
+
+  async getUserOpenGraphData(id: number, email: string) {
     return await this.siteRepository.findBy({
       user: {
         id,
