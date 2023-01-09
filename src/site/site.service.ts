@@ -31,9 +31,9 @@ export class SiteService {
     const { ogTitle, ogImage, ogUrl } = ogData;
 
     const ogResult = this.siteRepository.create({
-      ogTitle: ogTitle,
-      ogUrl: ogUrl,
-      ogImage: ogImage['url'],
+      ogTitle: ogTitle ?? '',
+      ogUrl: ogUrl ?? '',
+      ogImage: ogImage['url'] ?? '',
       user: { id, email },
     });
 
@@ -47,5 +47,9 @@ export class SiteService {
         email,
       },
     });
+  }
+
+  async findUserByAPI_KEY(API_KEY: string) {
+    return await this.userRepository.findOneBy({ api_key: API_KEY });
   }
 }

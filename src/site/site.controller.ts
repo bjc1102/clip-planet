@@ -31,14 +31,15 @@ export class SiteController {
         siteURL,
       );
       if (!error && ogData.success) {
-        const result = await this.siteService.saveUserOpenGraphData(ogData, {
-          id,
-          email,
-        });
+        const { ogTitle, ogImage, ogUrl } =
+          await this.siteService.saveUserOpenGraphData(ogData, {
+            id,
+            email,
+          });
         return {
-          ogTitle: result.ogTitle,
-          ogImage: result.ogImage,
-          ogUrl: result.ogUrl,
+          ogTitle,
+          ogImage,
+          ogUrl,
         };
       }
       if (error) throw new Error('open graph 정보를 불러올 수 없습니다.');
@@ -55,5 +56,33 @@ export class SiteController {
 
     const clips = await this.siteService.getUserOpenGraphData(id, email);
     return clips;
+  }
+
+  @Post('set/extension/clip')
+  async setExtensionClip(@Req() req: Request) {
+    //@ts-ignore
+    const { API_KEY, siteURL } = req.body;
+
+    try {
+      if (!siteURL) throw new Error('url 정보가 없습니다.');
+      const { ogData, error } = await this.siteService.fetchOpenGraphData(
+        siteURL,
+      );
+      const user = await this.siteService.findUserByAPI_KEY(API_KEY);
+      if (!user) throw new Error('API_KEY 정보가 없습니다.');
+      if (error && !ogData.success) throw new Error('url 정보가 없습니다.');
+
+      const { ogTitle, ogImage, ogUrl } =
+        //@ts-ignore
+        await this.siteService.saveUserOpenGraphData(ogData, user);
+
+      return {
+        ogTitle,
+        ogImage,
+        ogUrl,
+      };
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.FORBIDDEN);
+    }
   }
 }
