@@ -26,13 +26,15 @@ export class SiteService {
 
   async saveUserOpenGraphData(
     ogData: ogs.SuccessResult['result'],
+    siteURL: string,
     { id, email }: Partial<User>,
   ) {
-    const { ogTitle, ogImage, ogUrl } = ogData;
+    const { ogTitle, ogImage } = ogData;
+    //중복 데이터 관리 -> 중복이 있으면 저장하지않고 단순히 데이터를 리턴한다.
 
     const ogResult = this.siteRepository.create({
       ogTitle: ogTitle ?? '',
-      ogUrl: ogUrl ?? '',
+      ogUrl: siteURL ?? '',
       ogImage: ogImage['url'] ?? '',
       user: { id, email },
     });

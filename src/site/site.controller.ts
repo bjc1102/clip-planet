@@ -30,16 +30,17 @@ export class SiteController {
       const { ogData, error } = await this.siteService.fetchOpenGraphData(
         siteURL,
       );
+
       if (!error && ogData.success) {
-        const { ogTitle, ogImage, ogUrl } =
-          await this.siteService.saveUserOpenGraphData(ogData, {
+        const { ogTitle, ogImage } =
+          await this.siteService.saveUserOpenGraphData(ogData, siteURL, {
             id,
             email,
           });
         return {
           ogTitle,
           ogImage,
-          ogUrl,
+          siteURL,
         };
       }
       if (error) throw new Error('open graph 정보를 불러올 수 없습니다.');
