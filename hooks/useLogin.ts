@@ -1,7 +1,7 @@
 import React from 'react'
 import { getCookies } from 'cookies-next'
 import { useTokenStore } from 'lib/store'
-import Axios from 'lib/axios/instance'
+import { authAPI } from 'lib/axios/instance'
 
 const useLogin = () => {
   const { token: isToken, setToken } = useTokenStore()
@@ -11,7 +11,8 @@ const useLogin = () => {
   React.useEffect(() => {
     ;(async () => {
       if (accessToken) setToken(true)
-      if (!accessToken && refreshToken) setToken(await Axios.setRefreshToken())
+      if (!accessToken && refreshToken)
+        setToken(await authAPI.setRefreshToken())
     })()
   }, [])
 

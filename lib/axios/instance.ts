@@ -14,7 +14,7 @@ const setHeaders = (): AxiosRequestConfig => {
   }
 }
 
-const Axios = {
+const authAPI = {
   setRefreshToken: async () => {
     const res = await axios.post(
       `${baseURL}auth/refresh`,
@@ -23,9 +23,15 @@ const Axios = {
     )
     return res.status === 201
   },
+}
+
+const clipAPI = {
   setClip: async (url: string) => {
     return await instance.post('/sites/set/clip', { siteURL: url })
   },
+  getClips: async () => {
+    return await instance.get('/sites/get/clips')
+  },
 }
 
-export default Axios
+export { clipAPI, authAPI }
