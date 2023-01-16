@@ -6,7 +6,16 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import useLogin from '@/hooks/useLogin'
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
-  const [queryClient] = React.useState(() => new QueryClient())
+  const [queryClient] = React.useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+          },
+        },
+      })
+  )
   const isToken = useLogin()
 
   return (

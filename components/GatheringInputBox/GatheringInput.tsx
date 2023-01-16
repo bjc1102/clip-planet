@@ -16,25 +16,25 @@ const GatheringInput = () => {
   const [isOpen, setOpen] = React.useState(false)
   const { data, refetch } = useSetClip(url)
   const ref = React.useRef<HTMLDivElement>(null)
-  const close = useOutsideClick(ref, () => setOpen(false))
+
+  useOutsideClick(ref, () => setOpen(false))
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // const reg =
+    //   /((?:(?:http?|ftp)[s]*:\/\/)?[a-z0-9-%\/\&=?\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?)/gi
+
+    // if (!url.length) setError('URL을 입력해주세요')
+    // else if (!reg.test(url)) setError('URL형식이 아닙니다.')
+    // else {
+    //   setError('')
+    // }
     setUrl(e.currentTarget.value)
   }
 
   const onSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    const reg =
-      /((?:(?:http?|ftp)[s]*:\/\/)?[a-z0-9-%\/\&=?\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?)/gi
 
-    if (!url.length) setError('URL을 입력해주세요')
-    else if (!reg.test(url)) setError('URL형식이 아닙니다.')
-    else {
-      setError('')
-      refetch()
-    }
-
-    console.log(data)
+    refetch()
   }
   const selectType = (InputType: selectType) => {
     return () => {
@@ -43,7 +43,6 @@ const GatheringInput = () => {
     }
   }
   const toggleTypeBtn = () => {
-    console.log()
     return setOpen((v) => !v)
   }
 
@@ -94,9 +93,10 @@ const GatheringInput = () => {
           required
         />
         <button
+          disabled={!!error}
           onClick={onSubmit}
           type="submit"
-          className="p-2 rounded-r-lg bg-gray-700 hover:bg-gray-600 [&>*]:stroke-white"
+          className="p-2 disabled:opacity-20 rounded-r-lg bg-gray-700 hover:bg-gray-600 [&>*]:stroke-white"
         >
           {changeTypeIcon()}
         </button>

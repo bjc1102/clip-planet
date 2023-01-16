@@ -1,7 +1,7 @@
 import React from 'react'
 
 import sliceString from '@/utils/sliceString'
-import CardMenuBar from '@/components/MainContent/CardMenuBar'
+import CardMenuBar from '@/components/Card/CardMenuBar'
 import { AnimatePresence } from 'framer-motion'
 
 const Card = () => {

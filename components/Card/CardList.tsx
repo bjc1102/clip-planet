@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '@/components/MainContent/Card'
+import Card from '@/components/Card/Card'
 import { useQuery } from 'react-query'
 import { clipAPI } from 'lib/axios/instance'
 

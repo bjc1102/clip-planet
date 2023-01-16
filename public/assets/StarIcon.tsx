@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Star = () => {
+const StarIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,4 +12,4 @@ const Star = () => {
   )
 }
 
-export default Star
+export default StarIcon

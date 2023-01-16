@@ -40,7 +40,8 @@ instance.interceptors.response.use(
     return response
   },
   async (error) => {
-    if (error.response.status === 401) {
+    const refreshToken = getCookie('refresh-token')
+    if (error.response.status === 401 && refreshToken) {
       await Axios.setRefreshToken()
     }
     return error

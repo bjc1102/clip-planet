@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Directory() {
+function DirectoryIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,4 +12,4 @@ function Directory() {
   )
 }
 
-export default Directory
+export default DirectoryIcon
