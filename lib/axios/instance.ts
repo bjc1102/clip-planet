@@ -1,4 +1,4 @@
-import { ClipType } from '@/types/Clip'
+import { ClipType } from '@/types/clip'
 import { parsingAuthorization } from '@/utils/parsingToken'
 import axios, { AxiosRequestConfig } from 'axios'
 import { getCookie } from 'cookies-next'
