@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MenuBarBtn = ({ children }: { children: React.ReactNode }) => {
+const CardMenuButton = ({ children }: { children: React.ReactNode }) => {
   const onClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation()
   }
@@ -15,4 +15,4 @@ const MenuBarBtn = ({ children }: { children: React.ReactNode }) => {
   )
 }
 
-export default MenuBarBtn
+export default CardMenuButton

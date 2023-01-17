@@ -1,4 +1,4 @@
-import ICard from './Card'
+import ICard from './Clip'
 
 type IForm = Pick<ICard, 'title' | 'content' | 'url'>
 

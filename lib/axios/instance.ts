@@ -1,3 +1,4 @@
+import { ClipType } from '@/types/Clip'
 import { parsingAuthorization } from '@/utils/parsingToken'
 import axios, { AxiosRequestConfig } from 'axios'
 import { getCookie } from 'cookies-next'
@@ -26,11 +27,13 @@ const authAPI = {
 }
 
 const clipAPI = {
-  setClip: async (url: string) => {
-    return await instance.post('/sites/set/clip', { siteURL: url })
+  setClip: async (url: string): Promise<ClipType> => {
+    const result = await instance.post('/sites/set/clip', { siteURL: url })
+    return result.data
   },
-  getClips: async () => {
-    return await instance.get('/sites/get/clips')
+  getClips: async (): Promise<ClipType[]> => {
+    const result = await instance.get('/sites/get/clips')
+    return result.data
   },
 }
 

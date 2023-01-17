@@ -1,5 +1,5 @@
 import { nanoid } from 'nanoid'
-import ICard from '../types/Card'
+import ICard from '../types/Clip'
 import { getNowDate } from '../utils/getDate'
 
 export const MockCardData: ICard = {

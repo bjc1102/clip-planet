@@ -6,3 +6,12 @@ export default interface ICard {
   isMark: boolean
   date: string
 }
+
+export interface ClipType {
+  id: number
+  ogTitle: string
+  ogUrl: string
+  ogImage: string
+  isMark: boolean
+  date: string
+}

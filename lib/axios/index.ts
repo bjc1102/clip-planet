@@ -1,7 +1,7 @@
 import { parsingAuthorization } from '@/utils/parsingToken'
 import axios, { AxiosRequestHeaders } from 'axios'
 import { getCookie } from 'cookies-next'
-import Axios from './instance'
+import { authAPI } from './instance'
 
 export const baseURL = 'http://localhost:5000/api/'
 
@@ -42,7 +42,7 @@ instance.interceptors.response.use(
   async (error) => {
     const refreshToken = getCookie('refresh-token')
     if (error.response.status === 401 && refreshToken) {
-      await Axios.setRefreshToken()
+      await authAPI.setRefreshToken()
     }
     return error
   }
