@@ -1,6 +1,6 @@
 import { ClipType } from '@/types/clip'
 import { parsingAuthorization } from '@/utils/parsingToken'
-import axios, { AxiosRequestConfig } from 'axios'
+import axios from 'axios'
 import { getCookie } from 'cookies-next'
 import instance, { baseURL } from '.'
 
