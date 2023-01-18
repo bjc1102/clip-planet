@@ -3,13 +3,12 @@ import { clipAPI } from 'lib/axios/instance'
 import { useMutation } from 'react-query'
 
 const useSetClip = () => {
-  const {
-    data,
-    isLoading,
-    mutate: setClip,
-  } = useMutation(['setClip'], clipAPI.setClip)
+  const { isLoading, mutate: setClip } = useMutation(
+    ['setClip'],
+    clipAPI.setClip
+  )
 
-  return { data, isLoading, setClip }
+  return { isLoading, setClip }
 }
 
 export default useSetClip

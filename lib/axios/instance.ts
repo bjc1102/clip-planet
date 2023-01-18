@@ -4,23 +4,18 @@ import axios, { AxiosRequestConfig } from 'axios'
 import { getCookie } from 'cookies-next'
 import instance, { baseURL } from '.'
 
-const setHeaders = (): AxiosRequestConfig => {
-  const refreshToken = getCookie('refresh-token')
-
-  return {
-    headers: {
-      Authorization: parsingAuthorization(refreshToken),
-    },
-    withCredentials: true,
-  }
-}
-
 const authAPI = {
   setRefreshToken: async () => {
+    const refreshToken = getCookie('refresh-token')
     const res = await axios.post(
       `${baseURL}auth/refresh`,
       {},
-      { ...setHeaders() }
+      {
+        headers: {
+          Authorization: parsingAuthorization(refreshToken),
+        },
+        withCredentials: true,
+      }
     )
     return res.status === 201
   },
