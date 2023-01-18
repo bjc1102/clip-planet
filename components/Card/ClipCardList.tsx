@@ -1,6 +1,6 @@
 import React from 'react'
 import ClipCard from '@/components/Card/ClipCard'
-import useGetClipList from '@/hooks/queries/Clip/useGetClipList'
+import useGetClipList from '@/components/Card/queries/useGetClipList'
 
 const ClipCardList = () => {
   const { clipList } = useGetClipList()
