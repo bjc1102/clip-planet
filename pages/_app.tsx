@@ -1,36 +1,37 @@
 import React from 'react'
 import Head from 'next/head'
-import '../styles/global.css'
+import '@/styles/global.css'
 import type { AppProps } from 'next/app'
-import { socialImageTitle } from '../site.config'
-import { RecoilRoot } from 'recoil'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import useLogin from '@/hooks/useLogin'
+import Header from '@/components/Layout/Header'
+import Footer from '@/components/Layout/Footer'
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
-  const [showing, setShowing] = React.useState(false)
+  const [queryClient] = React.useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+          },
+        },
+      })
+  )
+  const isToken = useLogin()
 
-  React.useEffect(() => {
-    setShowing(true)
-  }, [])
-
-  if (!showing) {
-    return null
-  }
-
-  if (typeof window === 'undefined') {
-    return <></>
-  } else {
-    return (
-      <>
-        <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>{socialImageTitle}</title>
-        </Head>
-        <RecoilRoot>
-          <div className="min-h-screen overflow-hidden bg-bgColor text-white pt-10">
-            <Component {...pageProps} />
-          </div>
-        </RecoilRoot>
-      </>
-    )
-  }
+  return (
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <div className="min-h-screen bg-primaryColor1">
+        <QueryClientProvider client={queryClient}>
+          <Header />
+          <Component {...pageProps} />
+          <Footer />
+        </QueryClientProvider>
+      </div>
+    </>
+  )
 }
