@@ -1,17 +1,9 @@
-export default interface ICard {
-  id: string
-  title: string
-  content: string
-  url: string
-  isMark: boolean
-  date: string
-}
-
 export interface ClipType {
   id: number
   ogTitle: string
+  ogDescription: string
   ogUrl: string
   ogImage: string
+  favicon: string
   isMark: boolean
-  date: string
 }
