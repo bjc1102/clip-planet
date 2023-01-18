@@ -4,6 +4,8 @@ import '@/styles/global.css'
 import type { AppProps } from 'next/app'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import useLogin from '@/hooks/useLogin'
+import Header from '@/components/Layout/Header'
+import Footer from '@/components/Layout/Footer'
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(
@@ -25,7 +27,9 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
       </Head>
       <div className="min-h-screen bg-primaryColor1">
         <QueryClientProvider client={queryClient}>
+          <Header />
           <Component {...pageProps} />
+          <Footer />
         </QueryClientProvider>
       </div>
     </>
