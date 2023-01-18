@@ -1,19 +1,27 @@
 import React from 'react'
 import Directory from 'public/assets/DirectoryIcon'
 import Star from 'public/assets/StarIcon'
-import CardMenuButton from '@/components/common/CardMenuButton'
 import { motion } from 'framer-motion'
 import { CardMenuAnimation } from '@/utils/animation'
 
 const CardMenuBar = () => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+    e.stopPropagation()
+
   return (
     <motion.div {...CardMenuAnimation} className="flex gap-2">
-      <CardMenuButton>
+      <button
+        onClick={handleClick}
+        className="flex justify-center p-1 items-center rounded-lg border border-primaryColor1 shadow-sm hover:text-white hover:border-accentColor1 text-gray-400 bg-primaryColor1 hover:bg-primaryColor2 focus:ring-4 focus:outline-none focus:ring-gray-400"
+      >
         <Directory />
-      </CardMenuButton>
-      <CardMenuButton>
+      </button>
+      <button
+        onClick={handleClick}
+        className="flex justify-center p-1 items-center rounded-lg border border-primaryColor1 shadow-sm hover:text-white hover:border-accentColor1 text-gray-400 bg-primaryColor1 hover:bg-primaryColor2 focus:ring-4 focus:outline-none focus:ring-gray-400"
+      >
         <Star />
-      </CardMenuButton>
+      </button>
     </motion.div>
   )
 }
