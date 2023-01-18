@@ -32,13 +32,16 @@ const ClipCard = () => {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="https://www.techinterviewhandbook.org/img/favicon.png"
-          alt="site-favicon"
-          className="w-6 h-6 bg-white bg-opacity-0 object-cover rounded-md overflow-clip"
+          alt="site-image"
+          className="w-5 h-5 bg-white bg-opacity-0 object-cover rounded-md overflow-clip"
         />
-        <h5 className="text-base font-semibold tracking-tight text-accentColor2 group-hover:text-gray-500">
-          {sliceString('Noteworthy technology acquisitions 2021', 26)}
+        <h5 className="text-lg font-semibold tracking-tight text-accentColor2 group-hover:text-gray-500">
+          {sliceString('github', 30)}
         </h5>
       </div>
+      <span className="text-gray-500 group-hover:text-gray-700">
+        {sliceString('Noteworthy technology acquisitions 2021', 150)}
+      </span>
     </div>
   )
 }
