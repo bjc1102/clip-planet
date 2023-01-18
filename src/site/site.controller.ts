@@ -7,6 +7,7 @@ import {
   HttpStatus,
   Req,
   UseGuards,
+  Delete,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from 'src/database/User.entity';
@@ -20,7 +21,7 @@ export class SiteController {
 
   @Post('set/clip')
   @UseGuards(AuthGuard('jwt'))
-  async setOpenGraph(@Req() req: Request, @UserDecorator() userInfo: User) {
+  async setOpenGraphClip(@Req() req: Request, @UserDecorator() userInfo: User) {
     const { id, email } = userInfo;
     //@ts-ignore
     const siteURL = req.body.siteURL;
@@ -32,16 +33,16 @@ export class SiteController {
       );
 
       if (!error && ogData.success) {
-        const { ogTitle, ogImage } =
-          await this.siteService.saveUserOpenGraphData(ogData, siteURL, {
+        const saveResult = await this.siteService.saveUserOpenGraphData(
+          ogData,
+          siteURL,
+          {
             id,
             email,
-          });
-        return {
-          ogTitle,
-          ogImage,
-          siteURL,
-        };
+          },
+        );
+
+        return saveResult;
       }
       if (error) throw new Error('open graph 정보를 불러올 수 없습니다.');
       return '성공';
@@ -85,5 +86,11 @@ export class SiteController {
     } catch (error) {
       throw new HttpException(error, HttpStatus.FORBIDDEN);
     }
+  }
+
+  @Delete('delete/clip')
+  @UseGuards(AuthGuard('jwt'))
+  async deleteOpenGraphClip() {
+    return '';
   }
 }

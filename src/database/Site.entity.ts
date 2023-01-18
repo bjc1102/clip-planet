@@ -10,10 +10,19 @@ export class Site {
   ogTitle: string;
 
   @Column()
+  ogDescription: string;
+
+  @Column()
+  favicon: string;
+
+  @Column()
   ogUrl: string;
 
   @Column()
   ogImage: string;
+
+  @Column('boolean', { default: false })
+  isFavorite: boolean;
 
   @ManyToOne(() => User, (user) => user.Sites)
   user: User;
