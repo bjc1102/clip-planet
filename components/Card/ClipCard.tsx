@@ -4,6 +4,8 @@ import sliceString from '@/utils/sliceString'
 import CardMenuBar from '@/components/Card/CardMenuBar'
 import { AnimatePresence } from 'framer-motion'
 import { ClipType } from '@/types/clip'
+import validUrl from 'valid-url'
+import PlanetIcon from 'public/assets/PlanetIcon'
 
 interface ClipCardProps {
   clip: ClipType
@@ -20,6 +22,24 @@ const ClipCard = ({ clip }: ClipCardProps) => {
   const openInNewTab = () => () => {
     window.open(clip.ogUrl, '_blank')?.focus
   }
+  const checkFavicon = function (url: string) {
+    if (!validUrl.isWebUri(url)) {
+      return (
+        <div className="w-5 h-5 [&>*]:fill-accentColor1">
+          <PlanetIcon />
+        </div>
+      )
+    }
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={clip.favicon}
+        alt="site-image"
+        className="w-5 h-5 bg-white object-cover rounded-full overflow-clip"
+      />
+    )
+  }
+
   return (
     <div
       onClick={openInNewTab()}
@@ -37,18 +57,13 @@ const ClipCard = ({ clip }: ClipCardProps) => {
         </div>
       </div>
       <div className="flex gap-2 items-center pt-3">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={clip.favicon}
-          alt="site-image"
-          className="w-5 h-5 bg-white object-cover rounded-full overflow-clip"
-        />
+        {checkFavicon(clip.favicon)}
         <h5 className="text-base font-semibold tracking-tight text-accentColor2 group-hover:text-gray-500">
-          {sliceString(clip.ogTitle, 24)}
+          {sliceString(clip.ogTitle, 25)}
         </h5>
       </div>
       <span className="text-gray-500 group-hover:text-gray-700 text-sm">
-        {sliceString(clip.ogDescription, 45)}
+        {sliceString(clip.ogDescription, 100)}
       </span>
     </div>
   )
