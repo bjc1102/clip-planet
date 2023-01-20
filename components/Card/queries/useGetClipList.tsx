@@ -6,6 +6,7 @@ import { UserClipListKey } from 'static/query.key'
 const useGetClipList = () => {
   return useQuery(UserClipListKey, clipAPI.getClips, {
     staleTime: Infinity,
+    cacheTime: Infinity,
   })
 }
 

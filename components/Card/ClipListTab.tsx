@@ -1,12 +1,18 @@
 import React from 'react'
-import useForm from '@/hooks/useForm'
-import useSetClip from '@/components/Card/queries/useSetClip'
-import { URLType } from '@/types/clip'
-import urlValidation from '@/utils/validate'
-import Input from '../common/Input'
+import { useQueryClient } from '@tanstack/react-query'
+import { UserClipListKey } from 'static/query.key'
+import { ClipType } from '@/types/clip'
+import useGetClipList from './queries/useGetClipList'
 
 const ClipListTab = () => {
-  return <div className="my-10"></div>
+  const { data: clipList } = useGetClipList()
+
+  return (
+    <div className="my-16">
+      CLIP LiST 입니다
+      <span>{clipList?.length}</span>
+    </div>
+  )
 }
 
 export default ClipListTab
