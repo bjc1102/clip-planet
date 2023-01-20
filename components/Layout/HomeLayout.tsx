@@ -4,7 +4,7 @@ import ClipListTab from '../Card/ClipListTab'
 
 const HomeLayout = () => {
   return (
-    <main className="min-h-screen max-w-7xl mx-auto py-10">
+    <main className="min-h-screen max-w-7xl mx-auto pb-10">
       <ClipListTab />
       <CardList />
     </main>
