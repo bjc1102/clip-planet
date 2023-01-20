@@ -3,7 +3,7 @@ import ClipCard from '@/components/Card/ClipCard'
 import useGetClipList from '@/components/Card/queries/useGetClipList'
 
 const ClipCardList = () => {
-  const { clipList } = useGetClipList()
+  const { data: clipList } = useGetClipList()
 
   const clipSpreader = function () {
     return clipList?.map((clip) => {
