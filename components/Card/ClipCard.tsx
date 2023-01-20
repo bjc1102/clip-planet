@@ -22,6 +22,7 @@ const ClipCard = ({ clip }: ClipCardProps) => {
   const openInNewTab = () => () => {
     window.open(clip.ogUrl, '_blank')?.focus
   }
+
   const checkFavicon = function (url: string) {
     if (!validUrl.isWebUri(url)) {
       return (
@@ -50,8 +51,13 @@ const ClipCard = ({ clip }: ClipCardProps) => {
     >
       <div
         style={{ backgroundImage: `url(${clip.ogImage})` }}
-        className="group-hover:shadow-[inset_0_-55px_75px_-55px_rgba(0,0,0,1)] relative py-20 rounded-lg bg-no-repeat bg-center bg-cover"
+        className="relative group-hover:shadow-[inset_0_-55px_75px_-55px_rgba(0,0,0,1)] bg-primaryColor2 py-20 rounded-lg bg-no-repeat bg-center bg-cover"
       >
+        {!validUrl.isWebUri(clip.ogImage) && (
+          <div className="absoluteCenter [&>*]:fill-accentColor1 w-12 h-12">
+            <PlanetIcon />
+          </div>
+        )}
         <div className="absolute group-hover:text-white bottom-0 group-hover:transition-opacity duration-500 right-0 px-2 py-2">
           <AnimatePresence>{isHover && <CardMenuBar />}</AnimatePresence>
         </div>
@@ -63,7 +69,7 @@ const ClipCard = ({ clip }: ClipCardProps) => {
         </h5>
       </div>
       <span className="text-gray-500 group-hover:text-gray-700 text-sm">
-        {sliceString(clip.ogDescription, 100)}
+        {sliceString(clip.ogDescription, 500)}
       </span>
     </div>
   )
