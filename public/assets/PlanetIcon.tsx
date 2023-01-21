@@ -1,10 +1,9 @@
 import React from 'react'
 
-const Icon = () => {
+const PlanetIcon = () => {
   return (
     <svg
-      width="28"
-      height="28"
+      className="w-full h-full"
       viewBox="0 0 64 64"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -20,4 +19,4 @@ const Icon = () => {
   )
 }
 
-export default Icon
+export default PlanetIcon

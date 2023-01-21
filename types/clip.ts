@@ -7,3 +7,7 @@ export interface ClipType {
   favicon: string
   isMark: boolean
 }
+
+export interface URLType {
+  siteURL: string
+}
