@@ -47,7 +47,7 @@ export class SiteController {
       if (error) throw new Error('open graph 정보를 불러올 수 없습니다.');
       return '성공';
     } catch (error) {
-      throw new HttpException(error, HttpStatus.FORBIDDEN);
+      throw new HttpException(error.message, HttpStatus.FORBIDDEN);
     }
   }
 

@@ -61,9 +61,12 @@ export class AuthController {
   ) {
     const { refreshToken, email, id } = userInfo as JwtPayload;
 
+    // refresh_token과 이메일을 활용해 user 검사
     const user = await this.AuthService.findByRefreshToken(email, refreshToken);
+    // 새로운 token 발급
     const token = this.AuthService.getToken({ id, email });
-    await this.AuthService.updateRefreshToken(user[0], token.refreshToken);
+    // refreshToken 업데이트
+    await this.AuthService.updateRefreshToken(user, token.refreshToken);
 
     response.cookie('access-token', token.accessToken, {
       expires: expire('token'),
@@ -71,7 +74,6 @@ export class AuthController {
     response.cookie('refresh-token', token.refreshToken, {
       expires: expire('refresh-token'),
     });
-
     response.send({ message: 'success' });
   }
 
