@@ -4,9 +4,9 @@ import '@/styles/global.css'
 import type { AppProps } from 'next/app'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import useLogin from '@/hooks/useLogin'
 import Header from '@/components/Layout/Header'
 import Footer from '@/components/Layout/Footer'
+import AuthProvider, { AuthContext } from '@/hooks/Auth/AuthProvider'
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(
@@ -15,11 +15,11 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
         defaultOptions: {
           queries: {
             refetchOnWindowFocus: false,
+            retry: 3,
           },
         },
       })
   )
-  const isToken = useLogin()
 
   return (
     <>
@@ -29,9 +29,11 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
       <div className="min-h-screen bg-primaryColor1">
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={true} />
-          <Header />
-          <Component {...pageProps} />
-          <Footer />
+          <AuthProvider>
+            <Header />
+            <Component {...pageProps} />
+            <Footer />
+          </AuthProvider>
         </QueryClientProvider>
       </div>
     </>
