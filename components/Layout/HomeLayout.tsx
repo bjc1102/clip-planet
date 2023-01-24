@@ -1,6 +1,8 @@
 import React from 'react'
 import CardList from '@/components/Card/ClipCardList'
 import ClipListTab from '../Card/ClipListTab'
+import withAuth from '@/hooks/Auth/withAuth'
+import LoginLayout from './LoginLayout'
 
 const HomeLayout = () => {
   return (
@@ -11,4 +13,4 @@ const HomeLayout = () => {
   )
 }
 
-export default HomeLayout
+export default withAuth(HomeLayout, LoginLayout)

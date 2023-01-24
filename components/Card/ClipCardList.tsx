@@ -12,7 +12,7 @@ const ClipCardList = () => {
   }
 
   return (
-    <section className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 place-items-start max-md:px-4">
+    <section className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 place-items-start max-lg:px-4">
       {clipSpreader()}
     </section>
   )

@@ -1,16 +1,12 @@
 import React from 'react'
-import { useQueryClient } from '@tanstack/react-query'
-import { UserClipListKey } from 'static/query.key'
-import { ClipType } from '@/types/clip'
 import useGetClipList from './queries/useGetClipList'
 
 const ClipListTab = () => {
   const { data: clipList } = useGetClipList()
 
   return (
-    <div className="my-16">
-      CLIP LiST 입니다
-      <span>{clipList?.length}</span>
+    <div className="my-16 max-lg:px-4 text-white text-lg">
+      총 {clipList?.length}개의 클립이 있습니다!
     </div>
   )
 }

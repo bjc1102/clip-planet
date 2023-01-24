@@ -1,14 +1,11 @@
+import { authAPI } from 'lib/axios/instance'
 import React from 'react'
 
 const LoginButton = () => {
-  const f3 = async () => {
-    location.href = 'http://localhost:5000/api/auth/google/login'
-  }
-
   return (
     <button
       type="button"
-      onClick={f3}
+      onClick={authAPI.login}
       className="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55"
     >
       <svg

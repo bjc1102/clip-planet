@@ -1,4 +1,4 @@
-import { parsingAuthorization } from '@/utils/parsingToken'
+import { findRefreshToken, parsingAuthorization } from '@/utils/token'
 import axios, { AxiosRequestHeaders } from 'axios'
 import { getCookie } from 'cookies-next'
 import { authAPI } from './instance'
@@ -40,7 +40,7 @@ instance.interceptors.response.use(
     return response
   },
   async (error) => {
-    const refreshToken = getCookie('refresh-token')
+    const refreshToken = findRefreshToken()
     if (error.response.status === 401 && refreshToken) {
       await authAPI.setRefreshToken()
     }

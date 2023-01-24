@@ -1,13 +1,17 @@
 import { ClipType } from '@/types/clip'
-import { parsingAuthorization } from '@/utils/parsingToken'
+import { parsingAuthorization } from '@/utils/token'
 import axios from 'axios'
 import { getCookie } from 'cookies-next'
 import instance, { baseURL } from '.'
 
 const authAPI = {
-  setRefreshToken: async () => {
+  login: async () => {
+    location.href = `${baseURL}auth/google/login`
+  },
+  setRefreshToken: async (): Promise<boolean> => {
     const refreshToken = getCookie('refresh-token')
-    const res = await axios.post(
+
+    const result = await axios.post(
       `${baseURL}auth/refresh`,
       {},
       {
@@ -17,7 +21,7 @@ const authAPI = {
         withCredentials: true,
       }
     )
-    return res.status === 201
+    return result.status === 201
   },
 }
 
@@ -28,6 +32,10 @@ const clipAPI = {
   },
   getClips: async (): Promise<ClipType[]> => {
     const result = await instance.get('/sites/get/clips')
+    return result.data
+  },
+  deleteClip: async (id: number): Promise<null> => {
+    const result = await instance.delete(`sites/delete/clip/${id}`)
     return result.data
   },
 }
