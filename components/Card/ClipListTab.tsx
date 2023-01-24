@@ -2,7 +2,7 @@ import React from 'react'
 import useGetClipList from './queries/useGetClipList'
 
 const ClipListTab = () => {
-  const { data: clipList, isLoading } = useGetClipList()
+  const { data: clipList } = useGetClipList()
 
   return (
     <div className="my-16 max-lg:px-4 text-white text-lg">
