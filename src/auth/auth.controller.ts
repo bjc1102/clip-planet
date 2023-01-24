@@ -64,7 +64,7 @@ export class AuthController {
     // refresh_token과 이메일을 활용해 user 검사
     const user = await this.AuthService.findByRefreshToken(email, refreshToken);
     // 새로운 token 발급
-    const token = this.AuthService.getToken({ id, email });
+    const token = this.AuthService.getToken({ id: user.id, email: user.email });
     // refreshToken 업데이트
     await this.AuthService.updateRefreshToken(user, token.refreshToken);
 
@@ -74,6 +74,7 @@ export class AuthController {
     response.cookie('refresh-token', token.refreshToken, {
       expires: expire('refresh-token'),
     });
+
     response.send({ message: 'success' });
   }
 
