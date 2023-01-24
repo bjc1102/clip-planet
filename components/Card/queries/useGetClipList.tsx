@@ -7,7 +7,7 @@ import { errorToast } from '@/utils/toast'
 const useGetClipList = () =>
   useQuery(UserClipListKey, clipAPI.getClips, {
     staleTime: Infinity,
-    onError(err) {
+    onError() {
       errorToast('새로고침 후 다시 시도해주세요')
     },
   })

@@ -4,6 +4,7 @@ import CloseIcon from 'public/assets/CloseIcon'
 import { createPortal } from 'react-dom'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
 import { ButtonMouseEvent } from '@/types/utils'
+import Button from './Button'
 
 interface ConfirmModalProps {
   content: string
@@ -52,18 +53,22 @@ const ConfirmModal = ({
             <CloseIcon />
             <span className="sr-only">Close modal</span>
           </button>
-          <div className="p-6 text-center">
+          <div className="p-6 text-center [&>*]:fill-red-500">
             <AlertIcon />
             <h3 className="mb-5 text-lg font-normal text-gray-500">
               {content}
             </h3>
             <div className="flex gap-2 justify-center">
-              <button onClick={handleSubmit} type="button">
+              <Button style-type="error" onClick={handleSubmit} type="button">
                 확인
-              </button>
-              <button onClick={handleCloseButton} type="button">
+              </Button>
+              <Button
+                style-type="default"
+                onClick={handleCloseButton}
+                type="button"
+              >
                 취소
-              </button>
+              </Button>
             </div>
           </div>
         </div>
