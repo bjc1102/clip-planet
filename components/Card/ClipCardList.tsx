@@ -6,7 +6,7 @@ const ClipCardList = () => {
   const { data: clipList } = useGetClipList()
 
   const clipSpreader = function () {
-    return clipList?.map((clip) => {
+    return clipList?.reverse()?.map((clip) => {
       return <ClipCard clip={clip} key={clip.id} />
     })
   }
