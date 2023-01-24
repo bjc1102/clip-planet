@@ -47,6 +47,8 @@ const ClipDeleteButton = ({ id }: ClipDeleteButtonProps) => {
           content="정말로 삭제하시겠습니까?"
           closeCallback={handleModalClose}
           submitCallback={handleDeleteClip}
+          submitButtonStyle="error"
+          negativeButtonStyle="default"
         />
       )}
     </>

@@ -5,17 +5,22 @@ import { createPortal } from 'react-dom'
 import { useOutsideClick } from '@/hooks/useOutsideClick'
 import { ButtonMouseEvent } from '@/types/utils'
 import Button from './Button'
+import { buttonStyle } from '@/types/common'
 
 interface ConfirmModalProps {
   content: string
   submitCallback: () => void
   closeCallback: () => void
+  submitButtonStyle: buttonStyle
+  negativeButtonStyle: buttonStyle
 }
 
 const ConfirmModal = ({
   content,
   submitCallback,
   closeCallback,
+  submitButtonStyle,
+  negativeButtonStyle,
 }: ConfirmModalProps) => {
   const ref = React.useRef<HTMLDivElement>(null)
   const handleCloseButton = function (e: ButtonMouseEvent) {
@@ -59,11 +64,15 @@ const ConfirmModal = ({
               {content}
             </h3>
             <div className="flex gap-2 justify-center">
-              <Button style-type="error" onClick={handleSubmit} type="button">
+              <Button
+                style-type={submitButtonStyle}
+                onClick={handleSubmit}
+                type="button"
+              >
                 확인
               </Button>
               <Button
-                style-type="default"
+                style-type={negativeButtonStyle}
                 onClick={handleCloseButton}
                 type="button"
               >

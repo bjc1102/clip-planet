@@ -1,6 +1,5 @@
 import React from 'react'
-
-type buttonStyle = 'primary' | 'error' | 'default'
+import { buttonStyle } from '@/types/common'
 
 type buttonStyleType = {
   [key in buttonStyle]: string
