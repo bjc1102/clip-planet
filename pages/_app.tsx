@@ -1,13 +1,18 @@
 import React from 'react'
 import Head from 'next/head'
-import '@/styles/global.css'
+import { ToastContainer, toast } from 'react-toastify'
 import type { AppProps } from 'next/app'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { QueryClientProvider } from '@tanstack/react-query'
+
+import { client } from 'lib/react-query'
+
 import Header from '@/components/Layout/Header'
 import Footer from '@/components/Layout/Footer'
 import AuthProvider from '@/hooks/Auth/AuthProvider'
-import { client } from 'lib/react-query'
+
+import '@/styles/global.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(() => client)
