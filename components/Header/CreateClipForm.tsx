@@ -7,7 +7,7 @@ import useSetClip from '@/components/Header/queries/useSetClip'
 import Input from '@/components/common/Input'
 
 const CreateClipForm = () => {
-  const { isLoading, setClip } = useSetClip()
+  const { isLoading, mutate: setClip } = useSetClip()
 
   const { error, handleChange, handleSubmit } = useForm<URLType>({
     initialValue: { siteURL: '' },
