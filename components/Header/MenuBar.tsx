@@ -1,5 +1,4 @@
 import React from 'react'
-import { useTokenStore } from 'lib/store'
 import BookIcon from 'public/assets/BookIcon'
 
 const MenuBar = () => {

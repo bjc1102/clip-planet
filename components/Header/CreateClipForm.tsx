@@ -13,7 +13,7 @@ const CreateClipForm = () => {
   const { isLoading, mutate: setClip } = useSetClip()
   const queryClient = useQueryClient()
 
-  const { error, handleChange, handleSubmit } = useForm<URLType>({
+  const { handleChange, handleSubmit } = useForm<URLType>({
     initialValue: { siteURL: '' },
     validate: urlValidation,
     onSubmit: ({ siteURL }) =>
