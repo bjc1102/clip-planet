@@ -5,14 +5,24 @@ import urlValidation from '@/utils/validate'
 import LoadingIcon from 'public/assets/LoadingIcon'
 import useSetClip from '@/components/Header/queries/useSetClip'
 import Input from '@/components/common/Input'
+import { successToast } from '@/utils/toast'
+import { useQueryClient } from '@tanstack/react-query'
+import { UserClipListKey } from 'constant/query.key'
 
 const CreateClipForm = () => {
   const { isLoading, mutate: setClip } = useSetClip()
+  const queryClient = useQueryClient()
 
   const { error, handleChange, handleSubmit } = useForm<URLType>({
     initialValue: { siteURL: '' },
     validate: urlValidation,
-    onSubmit: ({ siteURL }) => setClip(siteURL),
+    onSubmit: ({ siteURL }) =>
+      setClip(siteURL, {
+        onSuccess() {
+          successToast('클립이 성공적으로 저장되었습니다!')
+          queryClient.invalidateQueries(UserClipListKey)
+        },
+      }),
   })
 
   return (

@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import type { AppProps } from 'next/app'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { QueryClientProvider } from '@tanstack/react-query'
@@ -29,6 +29,7 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
             <Header />
             <Component {...pageProps} />
             <Footer />
+            <ToastContainer />
           </AuthProvider>
         </QueryClientProvider>
       </div>
