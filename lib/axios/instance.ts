@@ -34,6 +34,10 @@ const clipAPI = {
     const result = await instance.get('/sites/get/clips')
     return result.data
   },
+  deleteClip: async (id: number): Promise<null> => {
+    const result = await instance.delete(`sites/delete/clip/${id}`)
+    return result.data
+  },
 }
 
 export { clipAPI, authAPI }
