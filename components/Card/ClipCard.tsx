@@ -1,9 +1,11 @@
 import React from 'react'
-
-import sliceString from '@/utils/sliceString'
-import CardMenuBar from '@/components/Card/CardMenuBar'
 import { AnimatePresence } from 'framer-motion'
+
+import ClipDeleteButton from '@/components/Card/ClipDeleteButton'
+import CardMenuBar from '@/components/Card/CardMenuBar'
+import sliceString from '@/utils/sliceString'
 import { ClipType } from '@/types/clip'
+
 import validUrl from 'valid-url'
 import PlanetIcon from 'public/assets/PlanetIcon'
 
@@ -47,8 +49,11 @@ const ClipCard = ({ clip }: ClipCardProps) => {
       ref={hoverRef}
       onMouseEnter={hoverMouseEvent(true)}
       onMouseLeave={hoverMouseEvent(false)}
-      className="group w-full lg:max-w-7xl overflow-hidden hover:cursor-pointer"
+      className="relative group w-full lg:max-w-7xl hover:cursor-pointer"
     >
+      <div className="absolute top-[-12px] right-[-12px] z-50 hidden group-hover:block">
+        <ClipDeleteButton />
+      </div>
       <div
         style={{ backgroundImage: `url(${clip.ogImage})` }}
         className="relative group-hover:shadow-[inset_0_-55px_75px_-55px_rgba(0,0,0,1)] bg-primaryColor2 py-20 rounded-lg bg-no-repeat bg-center bg-cover"
