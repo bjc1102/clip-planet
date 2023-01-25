@@ -8,6 +8,7 @@ import {
   Req,
   UseGuards,
   Delete,
+  Param,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { User } from 'src/database/User.entity';
@@ -53,7 +54,7 @@ export class SiteController {
 
   @Get('get/clips')
   @UseGuards(AuthGuard('jwt'))
-  async getUserSite(@UserDecorator() userInfo: User) {
+  async getUserClipList(@UserDecorator() userInfo: User) {
     const { id, email } = userInfo;
 
     const clips = await this.siteService.getUserOpenGraphData(id, email);
@@ -88,9 +89,20 @@ export class SiteController {
     }
   }
 
-  @Delete('delete/clip')
+  @Delete('delete/clip/:id')
   @UseGuards(AuthGuard('jwt'))
-  async deleteOpenGraphClip() {
-    return '';
+  async deleteUserClipData(
+    @Param('id') clipId: number,
+    @UserDecorator() userInfo: User,
+  ) {
+    const { id, email } = userInfo;
+
+    try {
+      await this.siteService.deleteClipData(clipId, { id, email });
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.FORBIDDEN);
+    }
+
+    return null;
   }
 }

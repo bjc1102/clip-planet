@@ -59,7 +59,7 @@ export class AuthController {
     @Res({ passthrough: true }) response: Response,
     @UserDecorator() userInfo: User,
   ) {
-    const { refreshToken, email, id } = userInfo as JwtPayload;
+    const { refreshToken, email } = userInfo as JwtPayload;
 
     // refresh_token과 이메일을 활용해 user 검사
     const user = await this.AuthService.findByRefreshToken(email, refreshToken);
