@@ -32,7 +32,6 @@ export class SiteController {
       const { ogData, error } = await this.siteService.fetchOpenGraphData(
         siteURL,
       );
-
       if (!error && ogData.success) {
         const saveResult = await this.siteService.saveUserOpenGraphData(
           ogData,
@@ -42,11 +41,9 @@ export class SiteController {
             email,
           },
         );
-
         return saveResult;
       }
       if (error) throw new Error('open graph 정보를 불러올 수 없습니다.');
-      return '성공';
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.FORBIDDEN);
     }
