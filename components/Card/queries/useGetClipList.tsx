@@ -10,6 +10,9 @@ const useGetClipList = () =>
     onError() {
       errorToast('새로고침 후 다시 시도해주세요')
     },
+    select(data) {
+      return [...data].reverse()
+    },
   })
 
 export default useGetClipList
