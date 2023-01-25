@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as ogs from 'open-graph-scraper';
 import { Site } from 'src/database/site.entity';
 import { User } from 'src/database/User.entity';
+import replaceUndefined from 'src/utils/replaceUndefined';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -33,11 +34,11 @@ export class SiteService {
     const { ogTitle, ogDescription, ogImage, favicon } = ogData;
 
     const ogResult = this.siteRepository.create({
-      ogTitle,
-      ogDescription,
+      ogTitle: ogTitle ?? '',
+      ogDescription: ogDescription ?? '',
       ogUrl: siteURL,
-      ogImage: ogImage['url'],
-      favicon,
+      ogImage: replaceUndefined(ogImage, 'url'),
+      favicon: favicon ?? '',
       user: { id, email },
     });
 
