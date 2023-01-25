@@ -1,5 +1,6 @@
 import useModal from '@/hooks/useModal'
-import { successToast } from '@/utils/toast'
+import isErrorType from '@/types/error'
+import { errorToast, successToast } from '@/utils/toast'
 import { useQueryClient } from '@tanstack/react-query'
 import { UserClipListKey } from 'constant/query.key'
 import CloseIcon from 'public/assets/CloseIcon'
@@ -29,6 +30,9 @@ const ClipDeleteButton = ({ id }: ClipDeleteButtonProps) => {
       onSuccess() {
         queryClient.invalidateQueries(UserClipListKey)
         successToast('클립이 삭제되었습니다!')
+      },
+      onError(error) {
+        if (isErrorType(error)) errorToast(error.message)
       },
     })
   }

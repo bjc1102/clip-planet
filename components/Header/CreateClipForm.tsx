@@ -5,9 +5,10 @@ import urlValidation from '@/utils/validate'
 import LoadingIcon from 'public/assets/LoadingIcon'
 import useSetClip from '@/components/Header/queries/useSetClip'
 import Input from '@/components/common/Input'
-import { successToast } from '@/utils/toast'
+import { errorToast, successToast } from '@/utils/toast'
 import { useQueryClient } from '@tanstack/react-query'
 import { UserClipListKey } from 'constant/query.key'
+import isErrorType from '@/types/error'
 
 const CreateClipForm = () => {
   const { isLoading, mutate: setClip } = useSetClip()
@@ -21,6 +22,9 @@ const CreateClipForm = () => {
         onSuccess() {
           successToast('클립이 성공적으로 저장되었습니다!')
           queryClient.invalidateQueries(UserClipListKey)
+        },
+        onError(error) {
+          if (isErrorType(error)) errorToast(error.message)
         },
       }),
   })
@@ -39,7 +43,7 @@ const CreateClipForm = () => {
         />
         <button
           type="submit"
-          className="absolute cursor-pointer rounded-r-lg text-white top-0 right-0 h-full focus:ring-4 focus:outline-none font-medium text-sm px-4 py-2 bg-accentColor1 hover:bg-blue-700 focus:ring-blue-800"
+          className="absolute disabled:opacity-70 cursor-pointer rounded-r-lg text-white top-0 right-0 h-full focus:ring-4 focus:outline-none font-medium text-sm px-4 py-2 bg-gray-500 hover:bg-gray-900 focus:ring-gray-800"
         >
           {isLoading ? <LoadingIcon /> : '추가하기'}
         </button>

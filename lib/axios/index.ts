@@ -44,6 +44,10 @@ instance.interceptors.response.use(
     if (error.response.status === 401 && refreshToken) {
       await authAPI.setRefreshToken()
     }
-    return error
+
+    if (axios.isAxiosError(error)) {
+      return Promise.reject(error.response?.data)
+    }
+    return Promise.reject(error)
   }
 )
