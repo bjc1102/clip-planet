@@ -27,15 +27,19 @@ const authAPI = {
 
 const clipAPI = {
   setClip: async (url: string): Promise<ClipType> => {
-    const result = await instance.post('/sites/set/clip', { siteURL: url })
+    const result = await instance.post('sites/set/clip', { siteURL: url })
     return result.data
   },
   getClips: async (): Promise<ClipType[]> => {
-    const result = await instance.get('/sites/get/clips')
+    const result = await instance.get('sites/get/clips')
     return result.data
   },
   deleteClip: async (id: number): Promise<null> => {
     const result = await instance.delete(`sites/delete/clip/${id}`)
+    return result.data
+  },
+  updateMarkClip: async (id: number): Promise<ClipType> => {
+    const result = await instance.put('sites/get/clips')
     return result.data
   },
 }
