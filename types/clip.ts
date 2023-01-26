@@ -5,7 +5,7 @@ export interface ClipType {
   ogUrl: string
   ogImage: string
   favicon: string
-  isMark: boolean
+  isFavorite: boolean
 }
 
 export interface URLType {

@@ -54,7 +54,7 @@ const ClipCard = ({ clip }: ClipCardProps) => {
         onMouseLeave={hoverMouseEvent(false)}
         className="relative group w-full lg:max-w-7xl hover:cursor-pointer"
       >
-        {clip.isMark && (
+        {clip.isFavorite && (
           <div className="absolute top-2 left-2 z-50 [&>*]:fill-yellow-300">
             <StarIcon />
           </div>
@@ -73,7 +73,7 @@ const ClipCard = ({ clip }: ClipCardProps) => {
           )}
           <div className="absolute group-hover:text-white bottom-0 group-hover:transition-opacity duration-500 right-0 px-2 py-2">
             <AnimatePresence>
-              {isHover && <CardMenuBar isMark={clip.isMark} />}
+              {isHover && <CardMenuBar isFavorite={clip.isFavorite} />}
             </AnimatePresence>
           </div>
         </div>

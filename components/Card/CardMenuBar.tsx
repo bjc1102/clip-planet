@@ -5,10 +5,10 @@ import { motion } from 'framer-motion'
 import { CardMenuAnimation } from '@/utils/animation'
 
 interface CardMenuBarProps {
-  isMark: boolean
+  isFavorite: boolean
 }
 
-const CardMenuBar = ({ isMark }: CardMenuBarProps) => {
+const CardMenuBar = ({ isFavorite }: CardMenuBarProps) => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
     e.stopPropagation()
 
@@ -24,7 +24,7 @@ const CardMenuBar = ({ isMark }: CardMenuBarProps) => {
         onClick={handleClick}
         className={
           'flex justify-center p-1 items-center rounded-lg border ' +
-          (isMark ? 'fill-yellow-300' : 'fill-white') +
+          (isFavorite ? 'fill-yellow-300' : 'fill-white') +
           ' border-primaryColor1 shadow-sm hover:text-white hover:border-accentColor1 text-gray-400 bg-primaryColor1 hover:bg-primaryColor2 focus:ring-4 focus:outline-none focus:ring-gray-400'
         }
       >
