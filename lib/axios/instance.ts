@@ -39,7 +39,7 @@ const clipAPI = {
     return result.data
   },
   updateMarkClip: async (id: number): Promise<ClipType> => {
-    const result = await instance.put('sites/get/clips')
+    const result = await instance.put(`sites/update/mark/${id}`)
     return result.data
   },
 }

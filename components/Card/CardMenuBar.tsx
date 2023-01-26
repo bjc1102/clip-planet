@@ -3,14 +3,31 @@ import DirectoryIcon from 'public/assets/DirectoryIcon'
 import StarIcon from 'public/assets/StarIcon'
 import { motion } from 'framer-motion'
 import { CardMenuAnimation } from '@/utils/animation'
+import useUpdateFavoriteClip from './queries/useUpdateFavoriteClip'
+import { errorToast } from '@/utils/toast'
+import isErrorType from '@/types/error'
+import { useQueryClient } from '@tanstack/react-query'
+import { UserClipListKey } from 'constant/query.key'
 
 interface CardMenuBarProps {
+  id: number
   isFavorite: boolean
 }
 
-const CardMenuBar = ({ isFavorite }: CardMenuBarProps) => {
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+const CardMenuBar = ({ id, isFavorite }: CardMenuBarProps) => {
+  const queryClient = useQueryClient()
+  const { mutate: updateFavoriteClip } = useUpdateFavoriteClip(id)
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation()
+    updateFavoriteClip(id, {
+      onSuccess() {
+        queryClient.invalidateQueries(UserClipListKey)
+      },
+      onError(error) {
+        if (isErrorType(error)) errorToast(error.message)
+      },
+    })
+  }
 
   return (
     <motion.div {...CardMenuAnimation} className="flex gap-2">

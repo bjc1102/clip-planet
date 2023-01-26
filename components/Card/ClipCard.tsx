@@ -74,7 +74,9 @@ const ClipCard = ({ clip }: ClipCardProps) => {
           )}
           <div className="absolute group-hover:text-white bottom-0 group-hover:transition-opacity duration-500 right-0 px-2 py-2">
             <AnimatePresence>
-              {isHover && <CardMenuBar isFavorite={clip.isFavorite} />}
+              {isHover && (
+                <CardMenuBar id={clip.id} isFavorite={clip.isFavorite} />
+              )}
             </AnimatePresence>
           </div>
         </div>
