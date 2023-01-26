@@ -8,6 +8,7 @@ import { ClipType } from '@/types/clip'
 import PlanetIcon from 'public/assets/PlanetIcon'
 
 import validUrl from 'valid-url'
+import StarIcon from 'public/assets/StarIcon'
 
 interface ClipCardProps {
   clip: ClipType
@@ -53,6 +54,11 @@ const ClipCard = ({ clip }: ClipCardProps) => {
         onMouseLeave={hoverMouseEvent(false)}
         className="relative group w-full lg:max-w-7xl hover:cursor-pointer"
       >
+        {clip.isMark && (
+          <div className="absolute top-2 left-2 z-50 [&>*]:fill-yellow-300">
+            <StarIcon />
+          </div>
+        )}
         <div className="absolute top-[-12px] right-[-12px] z-50 hidden group-hover:block">
           <ClipDeleteButton id={clip.id} />
         </div>
@@ -66,7 +72,9 @@ const ClipCard = ({ clip }: ClipCardProps) => {
             </div>
           )}
           <div className="absolute group-hover:text-white bottom-0 group-hover:transition-opacity duration-500 right-0 px-2 py-2">
-            <AnimatePresence>{isHover && <CardMenuBar />}</AnimatePresence>
+            <AnimatePresence>
+              {isHover && <CardMenuBar isMark={clip.isMark} />}
+            </AnimatePresence>
           </div>
         </div>
         <div className="flex gap-2 items-center pt-3">
