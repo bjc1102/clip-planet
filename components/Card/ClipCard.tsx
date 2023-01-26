@@ -8,7 +8,6 @@ import { ClipType } from '@/types/clip'
 import PlanetIcon from 'public/assets/PlanetIcon'
 
 import validUrl from 'valid-url'
-import StarIcon from 'public/assets/StarIcon'
 import StarMarkIcon from 'public/assets/StarMarkIcon'
 
 interface ClipCardProps {
