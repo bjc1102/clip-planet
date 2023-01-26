@@ -15,7 +15,7 @@ interface ClipDeleteButtonProps {
 
 const ClipDeleteButton = ({ id }: ClipDeleteButtonProps) => {
   const { isModalOpen, handleModalClose, handleModalOpen } = useModal()
-  const { mutate: deleteClip, isLoading } = useDeleteClip()
+  const { mutate: deleteClip, isLoading } = useDeleteClip(id)
   const queryClient = useQueryClient()
 
   const handleDeleteButtonClick = function (
