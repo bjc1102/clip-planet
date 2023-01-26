@@ -24,7 +24,9 @@ const CardMenuBar = ({ isFavorite }: CardMenuBarProps) => {
         onClick={handleClick}
         className={
           'flex justify-center p-1 items-center rounded-lg border ' +
-          (isFavorite ? 'fill-yellow-300' : 'fill-white') +
+          (isFavorite
+            ? '[&>*]:fill-yellow-300 stroke-2 stroke-yellow-300'
+            : 'fill-inherit stroke-2 stroke-white') +
           ' border-primaryColor1 shadow-sm hover:text-white hover:border-accentColor1 text-gray-400 bg-primaryColor1 hover:bg-primaryColor2 focus:ring-4 focus:outline-none focus:ring-gray-400'
         }
       >
