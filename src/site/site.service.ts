@@ -70,4 +70,14 @@ export class SiteService {
       },
     });
   }
+
+  async markClipData(id: number, { id: userId, email }: Partial<User>) {
+    return await this.siteRepository.update(
+      {
+        id,
+        user: { id: userId, email },
+      },
+      { isFavorite: () => 'NOT isFavorite' },
+    );
+  }
 }

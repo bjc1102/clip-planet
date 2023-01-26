@@ -9,8 +9,10 @@ import {
   UseGuards,
   Delete,
   Param,
+  Put,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { userInfo } from 'os';
 import { User } from 'src/database/User.entity';
 import { UserDecorator } from 'src/types/user.decorator';
 import { SiteService } from './site.service';
@@ -99,7 +101,22 @@ export class SiteController {
     } catch (error) {
       throw new HttpException(error.message, HttpStatus.FORBIDDEN);
     }
+  }
 
-    return null;
+  @Put('update/mark/:id')
+  @UseGuards(AuthGuard('jwt'))
+  async markUserClipData(
+    @Param('id') clipId: number,
+    @UserDecorator() userInfo: User,
+  ) {
+    try {
+      const result = await this.siteService.markClipData(clipId, userInfo);
+      if (result.affected === 1) return { id: clipId };
+      if (result.affected === 0)
+        throw new Error('클립 정보를 찾을 수 없습니다.');
+      throw new Error('업데이트 중 에러가 발생했습니다.');
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.FORBIDDEN);
+    }
   }
 }
