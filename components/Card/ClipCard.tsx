@@ -8,7 +8,7 @@ import { ClipType } from '@/types/clip'
 import PlanetIcon from 'public/assets/PlanetIcon'
 
 import validUrl from 'valid-url'
-import StarMarkIcon from 'public/assets/StarMarkIcon'
+import StarIcon from 'public/assets/StarIcon'
 
 interface ClipCardProps {
   clip: ClipType
@@ -55,8 +55,8 @@ const ClipCard = ({ clip }: ClipCardProps) => {
         className="relative group w-full lg:max-w-7xl hover:cursor-pointer"
       >
         {clip.isFavorite && (
-          <div className="absolute top-[-8px] left-2 z-50 [&>*]:fill-yellow-300">
-            <StarMarkIcon />
+          <div className="absolute top-[8px] left-2 z-50 [&>*]:fill-yellow-300">
+            <StarIcon />
           </div>
         )}
         <div className="absolute top-[-12px] right-[-12px] z-50 hidden group-hover:block">
