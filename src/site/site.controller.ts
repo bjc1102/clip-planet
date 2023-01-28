@@ -12,7 +12,6 @@ import {
   Put,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { userInfo } from 'os';
 import { User } from 'src/database/User.entity';
 import { UserDecorator } from 'src/types/user.decorator';
 import { SiteService } from './site.service';
@@ -63,20 +62,21 @@ export class SiteController {
   @Post('set/extension/clip')
   async setExtensionClip(@Req() req: Request) {
     //@ts-ignore
-    const { API_KEY, siteURL } = req.body;
+    const { api_key, siteURL } = req.body;
 
     try {
       if (!siteURL) throw new Error('url 정보가 없습니다.');
       const { ogData, error } = await this.siteService.fetchOpenGraphData(
         siteURL,
       );
-      const user = await this.siteService.findUserByAPI_KEY(API_KEY);
-      if (!user) throw new Error('API_KEY 정보가 없습니다.');
-      if (error && !ogData.success) throw new Error('url 정보가 없습니다.');
+      if (error) throw new Error('url 정보가 없습니다.');
+
+      const user = await this.siteService.findUserByAPI_KEY(api_key);
+      if (!user) throw new Error('유저가 없습니다. API 키를 다시 입력해주세요');
 
       const { ogTitle, ogImage, ogUrl } =
         //@ts-ignore
-        await this.siteService.saveUserOpenGraphData(ogData, user);
+        await this.siteService.saveUserOpenGraphData(ogData, siteURL, user);
 
       return {
         ogTitle,
@@ -84,7 +84,7 @@ export class SiteController {
         ogUrl,
       };
     } catch (error) {
-      throw new HttpException(error, HttpStatus.FORBIDDEN);
+      throw new HttpException(error.message, HttpStatus.FORBIDDEN);
     }
   }
 
