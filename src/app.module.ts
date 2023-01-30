@@ -7,10 +7,14 @@ import { User } from './database/User.entity';
 import { SiteModule } from './site/site.module';
 import { Site } from './database/Site.entity';
 
+console.log(process.env.DATABASE_NAME);
+
 @Module({
   imports: [
     AuthModule,
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: '127.0.0.1',
