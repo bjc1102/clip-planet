@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as ogs from 'open-graph-scraper';
-import { Site } from 'src/database/site.entity';
+import { Site } from 'src/database/Site.entity';
 import { User } from 'src/database/User.entity';
 import replaceUndefined from 'src/utils/replaceUndefined';
 import { Repository } from 'typeorm';

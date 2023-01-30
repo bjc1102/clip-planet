@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Site } from 'src/database/site.entity';
+import { Site } from 'src/database/Site.entity';
 import { User } from 'src/database/User.entity';
 import { SiteController } from './site.controller';
 import { SiteService } from './site.service';
