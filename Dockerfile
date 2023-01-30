@@ -1,17 +1,21 @@
-FROM node:18 AS builder
+# Base image
+FROM node:18
 
-WORKDIR /app
+# Create app directory
+WORKDIR /usr/src/app
 
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+COPY package.json ./
+COPY yarn.lock ./
+
+# Install app dependencies
+RUN yarn
+
+# Bundle app source
 COPY . .
 
-RUN yarn install
-
+# Creates a "dist" folder with the production build
 RUN yarn build
 
-FROM node:18-alpine
-
-WORKDIR /app
-
-COPY --from=builder /app ./
-
-CMD ["yarn", "start:prod"]
+# Start the server using the production build
+CMD [ "yarn", "start:prod" ]
