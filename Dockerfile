@@ -1,21 +1,48 @@
-# Base image
-FROM node:18
+###################
+# BUILD FOR LOCAL DEVELOPMENT
+###################
+FROM node:18-alpine As development
 
-# Create app directory
 WORKDIR /usr/src/app
 
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-COPY package.json ./
-COPY yarn.lock ./
+COPY --chown=node:node package.json ./
+COPY --chown=node:node yarn.lock ./
 
-# Install app dependencies
 RUN yarn
 
-# Bundle app source
-COPY . .
+COPY --chown=node:node . .
 
-# Creates a "dist" folder with the production build
+USER node
+
+
+###################
+# BUILD FOR PRODUCTION
+###################
+FROM node:18-alpine AS build
+
+WORKDIR /usr/src/app
+
+COPY --chown=node:node package.json ./
+COPY --chown=node:node yarn.lock ./
+
+COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
+
+COPY --chown=node:node . .
+
 RUN yarn build
 
-# Start the server using the production build
-CMD [ "yarn", "start:prod" ]
+ENV NODE_ENV production
+
+RUN yarn install --immutable --immutable-cache --check-cache && yarn cache clean
+
+USER node
+
+###################
+# BUILD FOR PRODUCTION
+###################
+FROM node:18-alpine AS production 
+
+COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
+COPY --chown=node:node --from=build /usr/src/app/dist ./dist
+
+CMD [ "node", "dist/src/main.js" ]
