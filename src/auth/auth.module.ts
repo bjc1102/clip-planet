@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { AtStrategy } from './utils/TokenStrategy';
 import { RtStrategy } from './utils/RTokenStrategy';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User]), JwtModule.register({})],

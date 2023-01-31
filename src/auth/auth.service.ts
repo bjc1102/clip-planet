@@ -5,11 +5,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/database/User.entity';
 import { JwtService } from '@nestjs/jwt';
 import { pbkdf2Sync } from 'crypto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
+    private readonly configService: ConfigService,
     private readonly jwtService: JwtService,
   ) {}
   async validateUser(googleUser: UserDetails) {
@@ -28,7 +30,7 @@ export class AuthService {
 
     const api_key = pbkdf2Sync(
       googleUser.email,
-      process.env.API_SECRET,
+      this.configService.get('API_SECRET'),
       1,
       32,
       'sha512',
@@ -46,11 +48,11 @@ export class AuthService {
   getToken(payload: JwtPayload) {
     const accessToken = this.jwtService.sign(payload, {
       expiresIn: '2h',
-      secret: process.env.JWT_SECRET,
+      secret: this.configService.get('JWT_SECRET'),
     });
     const refreshToken = this.jwtService.sign(payload, {
       expiresIn: '14d',
-      secret: process.env.JWT_SECRET,
+      secret: this.configService.get('JWT_SECRET'),
     });
 
     return { accessToken, refreshToken };
