@@ -2,10 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-import { User } from './database/User.entity';
 import { SiteModule } from './site/site.module';
-import { Site } from './database/Site.entity';
 
 @Module({
   imports: [
@@ -19,13 +16,13 @@ import { Site } from './database/Site.entity';
       useFactory: async (configService: ConfigService) => {
         return {
           type: 'mysql',
-          host: '127.0.0.1',
+          host: 'db',
           username: 'root',
           port: Number(configService.get('DATABASE_PORT')),
           password: configService.get('DATABASE_PASSWORD'),
           database: configService.get('DATABASE_NAME'),
-          entities: [User, Site],
-          synchronize: true,
+          entities: ['src/**/*.entity{.ts,.js}'],
+          synchronize: !(configService.get('NODE_ENV') === 'production'),
         };
       },
     }),
