@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
 import { User } from 'src/database/User.entity';
@@ -10,7 +11,10 @@ import { AuthService } from './auth.service';
 
 @Controller('/auth')
 export class AuthController {
-  constructor(private readonly AuthService: AuthService) {}
+  constructor(
+    private readonly AuthService: AuthService,
+    private readonly configService: ConfigService,
+  ) {}
 
   // /api/auth/google/login
   @Get('google/login')
@@ -22,11 +26,7 @@ export class AuthController {
   // api/auth/google/redirect
   @Get('google/redirect')
   @UseGuards(AuthGuard('google'))
-  async handleRedirect(
-    @Req() req: Request,
-    @Res() res: Response,
-    @UserDecorator() userInfo: User,
-  ) {
+  async handleRedirect(@Res() res: Response, @UserDecorator() userInfo: User) {
     //@ts-ignore
     const user = await this.AuthService.validateUser({
       ...userInfo,
@@ -48,7 +48,7 @@ export class AuthController {
       expires: expire('refresh-token'),
     });
 
-    res.redirect(process.env.DOMAIN);
+    res.redirect(this.configService.get('DOMAIN'));
   }
 
   // api/auth/refresh

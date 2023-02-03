@@ -1,9 +1,11 @@
 import { NestFactory } from '@nestjs/core';
+import { ConfigService } from '@nestjs/config';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const config = app.get(ConfigService);
 
   app.setGlobalPrefix('api');
   app.enableCors({
@@ -11,7 +13,7 @@ async function bootstrap() {
     origin: true,
   });
 
-  await app.listen(process.env.PORT ? parseInt(process.env.PORT) : '5000');
+  await app.listen(config.get('PORT') ? parseInt(config.get('PORT')) : 5000);
 }
 
 bootstrap();
