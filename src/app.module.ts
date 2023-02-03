@@ -17,7 +17,7 @@ import { User, Site } from './database';
       useFactory: async (configService: ConfigService) => {
         return {
           type: 'mysql',
-          host: '127.0.0.1',
+          host: configService.get('DATABASE_HOST'),
           username: 'root',
           port: Number(configService.get('DATABASE_PORT')),
           password: configService.get('DATABASE_PASSWORD'),

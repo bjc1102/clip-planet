@@ -1,5 +1,5 @@
-import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import { ConfigService } from '@nestjs/config';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppModule } from './app.module';
 
@@ -13,7 +13,7 @@ async function bootstrap() {
     origin: true,
   });
 
-  await app.listen(config.get('PORT') ? parseInt(config.get('PORT')) : '5000');
+  await app.listen(config.get('PORT') ? parseInt(config.get('PORT')) : 5000);
 }
 
 bootstrap();
