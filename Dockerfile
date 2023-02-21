@@ -21,3 +21,4 @@ COPY --from=builder /usr/src/app ./
 RUN chmod +x docker-entrypoint.sh
 ENTRYPOINT ./docker-entrypoint.sh
 
+# CMD ["yarn","start:prod"]
