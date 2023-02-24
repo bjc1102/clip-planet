@@ -19,7 +19,6 @@ $ yarn start:prod
 
 ## Deploy
 
-```bash
-docker create network db_net
+```shell
 docker-compose up
 ```
