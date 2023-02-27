@@ -11,6 +11,6 @@
 - [ ] Documentation content changes
 - [ ] Other... Please describe:
 
-## Summary
+## 요약
 
 ## 개발 및 수정 내용
