@@ -1,36 +1,38 @@
 import React from 'react'
 import Head from 'next/head'
-import '../styles/global.css'
+import { ToastContainer } from 'react-toastify'
 import type { AppProps } from 'next/app'
-import { socialImageTitle } from '../site.config'
-import { RecoilRoot } from 'recoil'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { QueryClientProvider } from '@tanstack/react-query'
+
+import { client } from 'lib/react-query'
+
+import Header from '@/components/Layout/Header'
+import Footer from '@/components/Layout/Footer'
+import AuthProvider from '@/hooks/Auth/AuthProvider'
+
+import '@/styles/global.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function CustomApp({ Component, pageProps }: AppProps) {
-  const [showing, setShowing] = React.useState(false)
+  const [queryClient] = React.useState(() => client)
 
-  React.useEffect(() => {
-    setShowing(true)
-  }, [])
-
-  if (!showing) {
-    return null
-  }
-
-  if (typeof window === 'undefined') {
-    return <></>
-  } else {
-    return (
-      <>
-        <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <title>{socialImageTitle}</title>
-        </Head>
-        <RecoilRoot>
-          <div className="min-h-screen overflow-hidden bg-bgColor text-white pt-10">
+  return (
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <div className="min-h-screen bg-primaryColor1">
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={true} />
+          <AuthProvider>
+            <Header />
             <Component {...pageProps} />
-          </div>
-        </RecoilRoot>
-      </>
-    )
-  }
+            <Footer />
+            <ToastContainer />
+          </AuthProvider>
+        </QueryClientProvider>
+      </div>
+    </>
+  )
 }

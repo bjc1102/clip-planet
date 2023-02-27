@@ -1,4 +1,4 @@
-## PR 타입
+## PR Type
 
 <!-- Please check the one that applies to this PR using "x". -->
 

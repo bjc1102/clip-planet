@@ -1,22 +1,16 @@
-// eslint-disable-next-line
 import React from 'react'
-import { useRecoilState } from 'recoil'
-import { modalState } from '../atoms/atoms'
-import { defaultModalState } from '../atoms/atomsValue'
 
 const useModal = () => {
-  const [modal, setModal] = useRecoilState(modalState)
-  const setModalToggle = (id?: string) => {
-    if (id === undefined) setModal({ ...defaultModalState })
-    else {
-      setModal(() => ({
-        id: id,
-        state: true,
-      }))
-    }
+  const [isModalOpen, setIsModalOpen] = React.useState(false)
+
+  const handleModalOpen = function () {
+    setIsModalOpen(true)
+  }
+  const handleModalClose = function () {
+    setIsModalOpen(false)
   }
 
-  return { modal, setModalToggle }
+  return { isModalOpen, handleModalOpen, handleModalClose }
 }
 
 export default useModal
