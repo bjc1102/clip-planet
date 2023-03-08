@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3'
 
 services:
   server:
@@ -27,7 +27,9 @@ services:
       MYSQL_DATABASE: ${DATABASE_NAME}
       MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
       MYSQL_TCP_PORT: ${DATABASE_PORT}
+      MYSQL_DATA_DIR: /var/lib/mysql
 
 networks:
   db_net:
     driver: bridge
+
