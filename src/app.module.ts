@@ -10,8 +10,7 @@ import { User, Site } from './database';
     AuthModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath:
-        process.env.NODE_ENV === 'local' ? './.env.dev' : './.env.prod',
+      envFilePath: process.env.NODE_ENV === 'local' ? './.env.dev' : './.env',
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
