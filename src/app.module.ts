@@ -18,11 +18,11 @@ import { User, Site } from './database';
       useFactory: async (configService: ConfigService) => {
         return {
           type: 'mysql',
-          host: configService.get('DATABASE_HOST'),
+          host: configService.get('MYSQL_HOST'),
           username: 'root',
           port: Number(configService.get('DATABASE_PORT')),
-          password: configService.get('DATABASE_PASSWORD'),
-          database: configService.get('DATABASE_NAME'),
+          password: configService.get('MYSQL_ROOT_PASSWORD'),
+          database: configService.get('MYSQL_DATABASE'),
           entities: [User, Site],
           synchronize: !(configService.get('NODE_ENV') === 'production'),
         };
