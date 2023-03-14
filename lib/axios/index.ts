@@ -6,7 +6,7 @@ import { authAPI } from './instance'
 export const baseURL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:5000/api/'
-    : 'http://clip-planet.site/api/'
+    : 'http://clip-planet.site:5000/api/'
 
 const instance = axios.create({
   baseURL: baseURL,
