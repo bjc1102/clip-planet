@@ -2,9 +2,9 @@
   "name": "startup-page",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env NODE_ENV=development next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "cross-env NODE_ENV=production next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -16,6 +16,7 @@
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "axios": "^0.27.2",
     "cookies-next": "^2.1.1",
+    "cross-env": "^7.0.3",
     "eslint-config-prettier": "^8.5.0",
     "framer-motion": "^7.10.3",
     "lodash": "^4.17.21",

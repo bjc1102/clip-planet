@@ -3,7 +3,10 @@ import axios, { AxiosRequestHeaders } from 'axios'
 import { getCookie } from 'cookies-next'
 import { authAPI } from './instance'
 
-export const baseURL = 'http://localhost:5000/api/'
+export const baseURL =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:5000/api/'
+    : 'http://clip-planet.site/api/'
 
 const instance = axios.create({
   baseURL: baseURL,
