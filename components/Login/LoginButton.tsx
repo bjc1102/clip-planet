@@ -1,5 +1,5 @@
-import { authAPI } from 'lib/axios/instance'
 import React from 'react'
+import { authAPI } from 'lib/axios/instance'
 
 const LoginButton = () => {
   return (
