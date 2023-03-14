@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const config = app.get(ConfigService);
   const corsOrigin =
-    process.env.NODE_ENV === 'local' ? true : [config.get('DOMAIN')];
+    process.env.NODE_ENV === 'development' ? true : [config.get('DOMAIN')];
 
   app.setGlobalPrefix('api');
   app.enableCors({
