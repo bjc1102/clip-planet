@@ -6,11 +6,13 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const config = app.get(ConfigService);
+  const corsOrigin =
+    process.env.NODE_ENV === 'local' ? true : [config.get('DOMAIN')];
 
   app.setGlobalPrefix('api');
   app.enableCors({
     credentials: true,
-    origin: true,
+    origin: corsOrigin,
   });
 
   await app.listen(config.get('PORT') ? parseInt(config.get('PORT')) : 5000);
