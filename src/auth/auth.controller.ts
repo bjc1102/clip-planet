@@ -5,9 +5,9 @@ import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
 import { User } from 'src/database/User.entity';
 import { UserDecorator } from 'src/types/user.decorator';
-import expire from 'src/utils/getExpires';
 import { JwtPayload, UserDetails } from 'src/utils/types';
 import { AuthService } from './auth.service';
+import cookieCommonOptions from './static/cookie-option';
 
 @Controller('/auth')
 export class AuthController {
@@ -42,10 +42,10 @@ export class AuthController {
     await this.AuthService.updateRefreshToken(user, refreshToken);
 
     res.cookie('access-token', accessToken, {
-      expires: expire('token'),
+      ...cookieCommonOptions('token'),
     });
     res.cookie('refresh-token', refreshToken, {
-      expires: expire('refresh-token'),
+      ...cookieCommonOptions('refresh-token'),
     });
 
     res.redirect(this.configService.get('DOMAIN'));
@@ -69,10 +69,10 @@ export class AuthController {
     await this.AuthService.updateRefreshToken(user, token.refreshToken);
 
     response.cookie('access-token', token.accessToken, {
-      expires: expire('token'),
+      ...cookieCommonOptions('token'),
     });
     response.cookie('refresh-token', token.refreshToken, {
-      expires: expire('refresh-token'),
+      ...cookieCommonOptions('refresh-token'),
     });
 
     response.send({ message: 'success' });
