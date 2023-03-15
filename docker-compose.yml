@@ -4,7 +4,6 @@ services:
   nginx:
     container_name: nginx
     image: nginx
-    # image: gcr.io/bootingsi/nginx
     restart: always
     ports:
       - '80:80'
