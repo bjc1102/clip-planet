@@ -13,7 +13,7 @@ const cookieCommonOptions = (
   expires: expire(tokenName),
   sameSite: 'none',
   secure: process.env.NODE_ENV === 'production',
-  domain: process.env.NODE_ENV === 'production' && '.clip-planet.vercel.app',
+  domain: process.env.NODE_ENV === 'production' && '.vercel.app',
 });
 
 export default cookieCommonOptions;
