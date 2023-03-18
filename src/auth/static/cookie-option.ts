@@ -2,7 +2,7 @@ import expire from 'src/utils/getExpires';
 
 interface CookieOptions {
   expires: Date;
-  sameSite: 'none';
+  sameSite: 'lax' | 'none';
   secure: boolean;
   domain: string;
 }
@@ -11,9 +11,10 @@ const cookieCommonOptions = (
   tokenName: 'refresh-token' | 'token',
 ): CookieOptions => ({
   expires: expire(tokenName),
-  sameSite: 'none',
+  sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
   secure: process.env.NODE_ENV === 'production',
-  domain: '.clip-planet.site',
+  domain:
+    process.env.NODE_ENV === 'production' ? '.clip-planet.site' : 'localhost',
 });
 
 export default cookieCommonOptions;
