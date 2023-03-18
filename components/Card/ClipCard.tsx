@@ -16,12 +16,6 @@ interface ClipCardProps {
 
 const ClipCard = ({ clip }: ClipCardProps) => {
   const hoverRef = React.useRef<HTMLDivElement>(null)
-  const [isHover, setIsHover] = React.useState(false)
-
-  const hoverMouseEvent = (nowHover: boolean) => {
-    if (nowHover) return () => setIsHover(true)
-    else return () => setIsHover(false)
-  }
 
   const openInNewTab = () => () => {
     window.open(clip.ogUrl, '_blank')?.focus
@@ -50,8 +44,6 @@ const ClipCard = ({ clip }: ClipCardProps) => {
       <div
         onClick={openInNewTab()}
         ref={hoverRef}
-        onMouseEnter={hoverMouseEvent(true)}
-        onMouseLeave={hoverMouseEvent(false)}
         className="relative group w-full lg:max-w-7xl hover:cursor-pointer"
       >
         {clip.isFavorite && (
@@ -71,13 +63,7 @@ const ClipCard = ({ clip }: ClipCardProps) => {
               <PlanetIcon />
             </div>
           )}
-          <div className="absolute group-hover:text-white bottom-0 group-hover:transition-opacity duration-500 right-0 px-2 py-2">
-            <AnimatePresence>
-              {isHover && (
-                <CardMenuBar id={clip.id} isFavorite={clip.isFavorite} />
-              )}
-            </AnimatePresence>
-          </div>
+          {/* 카드 메뉴바는 현재 필요없는 기능으로 생각해서 임시 삭제 */}
         </div>
         <div className="flex gap-2 items-center pt-3">
           {checkFavicon(clip.favicon)}
