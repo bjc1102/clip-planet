@@ -75,7 +75,7 @@ export class AuthController {
       ...cookieCommonOptions('refresh-token'),
     });
 
-    response.send({ message: 'success' });
+    response.redirect(this.configService.get('DOMAIN'));
   }
 
   @Get('user')
