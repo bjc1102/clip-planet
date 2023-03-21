@@ -28,7 +28,6 @@ export default function CustomApp({ Component, pageProps }: AppProps) {
           <AuthProvider>
             <Header />
             <Component {...pageProps} />
-            <Footer />
             <ToastContainer />
           </AuthProvider>
         </QueryClientProvider>
