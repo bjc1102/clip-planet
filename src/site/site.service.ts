@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as ogs from 'open-graph-scraper';
 import { Site } from 'src/database/Site.entity';
@@ -18,11 +18,15 @@ export class SiteService {
   async fetchOpenGraphData(url: string) {
     const options = { url };
 
-    return ogs(options).then(async (data) => {
-      const { error, result: ogData } = data;
+    return ogs(options)
+      .then(async (data) => {
+        const { result: ogData } = data;
 
-      return { ogData, error };
-    });
+        return { ogData };
+      })
+      .catch((data) => {
+        return data;
+      });
   }
 
   async saveUserOpenGraphData(

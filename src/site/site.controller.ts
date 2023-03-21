@@ -30,10 +30,8 @@ export class SiteController {
 
     try {
       if (!siteURL) throw new Error('url 정보가 없습니다.');
-      const { ogData, error } = await this.siteService.fetchOpenGraphData(
-        siteURL,
-      );
-      if (!error && ogData.success) {
+      const { ogData } = await this.siteService.fetchOpenGraphData(siteURL);
+      if (ogData.success) {
         const saveResult = await this.siteService.saveUserOpenGraphData(
           ogData,
           siteURL,
@@ -42,11 +40,11 @@ export class SiteController {
             email,
           },
         );
+
         return saveResult;
       }
-      if (error) throw new Error('open graph 정보를 불러올 수 없습니다.');
     } catch (error) {
-      throw new HttpException(error.message, HttpStatus.FORBIDDEN);
+      if (error) throw new HttpException(error.message, HttpStatus.NOT_FOUND);
     }
   }
 
@@ -66,16 +64,12 @@ export class SiteController {
 
     try {
       if (!siteURL) throw new Error('url 정보가 없습니다.');
-      const { ogData, error } = await this.siteService.fetchOpenGraphData(
-        siteURL,
-      );
-      if (error) throw new Error('url 정보가 없습니다.');
+      const { ogData } = await this.siteService.fetchOpenGraphData(siteURL);
 
       const user = await this.siteService.findUserByAPI_KEY(api_key);
       if (!user) throw new Error('유저가 없습니다. API 키를 다시 입력해주세요');
 
       const { ogTitle, ogImage, ogUrl } =
-        //@ts-ignore
         await this.siteService.saveUserOpenGraphData(ogData, siteURL, user);
 
       return {
@@ -84,7 +78,7 @@ export class SiteController {
         ogUrl,
       };
     } catch (error) {
-      throw new HttpException(error.message, HttpStatus.FORBIDDEN);
+      throw new HttpException(error.message, HttpStatus.NOT_FOUND);
     }
   }
 
