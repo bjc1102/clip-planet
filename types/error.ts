@@ -4,7 +4,11 @@ interface ErrorType {
 }
 
 const isErrorType = function (value: unknown): value is ErrorType {
-  return typeof (value as ErrorType).statusCode === 'number'
+  if (typeof value !== 'object' || value === null) return false
+
+  return (
+    'statusCode' in value && typeof (value as ErrorType).statusCode === 'number'
+  )
 }
 
 export default isErrorType
