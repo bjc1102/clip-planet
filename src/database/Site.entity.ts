@@ -21,9 +21,6 @@ export class Site {
   @Column()
   ogImage: string;
 
-  @Column('boolean', { default: false })
-  isFavorite: boolean;
-
   @ManyToOne(() => User, (user) => user.Sites)
   user: User;
 }
