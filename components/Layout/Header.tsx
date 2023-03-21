@@ -14,7 +14,6 @@ const Header = () => {
       <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center max-md:px-4">
         <Logo />
         {auth.isToken && <CreateClipForm />}
-        <MenuBar />
       </div>
     </nav>
   )
