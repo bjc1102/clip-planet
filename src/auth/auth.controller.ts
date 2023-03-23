@@ -4,15 +4,16 @@ import { ConfigService } from '@nestjs/config';
 import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
 import { User } from 'src/database/User.entity';
-import { UserDecorator } from 'src/types/user.decorator';
-import { JwtPayload, UserDetails } from 'src/utils/types';
+import { UserDecorator } from 'src/utils/user.decorator';
+import { JwtPayload } from 'src/types/jwt.interface';
 import { AuthService } from './auth.service';
 import cookieCommonOptions from './static/cookie-option';
+import UserAuthInterface from 'src/types/user.interface';
 
 @Controller('/auth')
 export class AuthController {
   constructor(
-    private readonly AuthService: AuthService,
+    private readonly authService: AuthService,
     private readonly configService: ConfigService,
   ) {}
 
@@ -26,11 +27,11 @@ export class AuthController {
   // api/auth/google/redirect
   @Get('google/redirect')
   @UseGuards(AuthGuard('google'))
-  async handleRedirect(@Res() res: Response, @UserDecorator() userInfo: User) {
-    //@ts-ignore
-    const user = await this.AuthService.validateUser({
-      ...userInfo,
-    } as UserDetails);
+  async handleRedirect(
+    @Res() res: Response,
+    @UserDecorator() userInfo: UserAuthInterface,
+  ) {
+    const user = await this.authService.validateUser(userInfo);
 
     //유저 정보로 jwt 토큰 생성하기
     const payload: JwtPayload = {
@@ -38,8 +39,8 @@ export class AuthController {
       email: user.email,
     };
 
-    const { accessToken, refreshToken } = this.AuthService.getToken(payload);
-    await this.AuthService.updateRefreshToken(user, refreshToken);
+    const { accessToken, refreshToken } = this.authService.getToken(payload);
+    await this.authService.updateRefreshToken(user, refreshToken);
 
     res.cookie('access-token', accessToken, {
       ...cookieCommonOptions('token'),
@@ -62,11 +63,11 @@ export class AuthController {
     const { refreshToken, email } = userInfo as JwtPayload;
 
     // refresh_token과 이메일을 활용해 user 검사
-    const user = await this.AuthService.findByRefreshToken(email, refreshToken);
+    const user = await this.authService.findByRefreshToken(email, refreshToken);
     // 새로운 token 발급
-    const token = this.AuthService.getToken({ id: user.id, email: user.email });
+    const token = this.authService.getToken({ id: user.id, email: user.email });
     // refreshToken 업데이트
-    await this.AuthService.updateRefreshToken(user, token.refreshToken);
+    await this.authService.updateRefreshToken(user, token.refreshToken);
 
     response.cookie('access-token', token.accessToken, {
       ...cookieCommonOptions('token'),
@@ -86,7 +87,7 @@ export class AuthController {
       email: userEmail,
       imageUrl,
       Name: name,
-    } = await this.AuthService.findUser(id, email);
+    } = await this.authService.findUser(id, email);
 
     return { userEmail, imageUrl, name };
   }
