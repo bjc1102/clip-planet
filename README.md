@@ -7,10 +7,11 @@
 하지만 서비스보다 기술에 초점을 맞추고 구조를 잘못잡았다고 생각하여 임시 중단하기로 결정했고 이후 [KPT 회고를 통해 정리하였습니다](https://choiblog.tistory.com/158)
 
 ## Tech Stack
-- Backend: Nest.js
-- Database: MySQL, TypeORM
+- Backend Framework: Nest.js
+- Database: MySQL
+- ORM: TypeORM
 - Authentication: JSON Web Tokens (JWT), Google OAuth
-- Deployment: Docker,Docker-compose ,Google Cloud Compute Engine. Nginx
+- Deployment: Docker, Docker-compose ,Google Cloud Compute Engine, Nginx
 
 ## Issue
 - [클라이언트에서 서버 초기 연결문제, http](https://choiblog.tistory.com/157)
