@@ -26,6 +26,7 @@
 ## Installation
 
 ```bash
+$ git clone https://github.com/bjc1102/clipplanet-server.git
 $ yarn install
 ```
 
@@ -42,7 +43,7 @@ $ yarn start:dev
 $ yarn build
 $ yarn start:prod
 
-or 
+# or 
 
 $ docker-compose up
 ```
