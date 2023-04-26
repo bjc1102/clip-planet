@@ -1,0 +1,48 @@
+@import "../../index.scss";
+
+.save_button {
+  outline: none;
+  height: 30px;
+  text-align: center;
+  width: 100px;
+  border-radius: 40px;
+  background: $primaryColor1;
+  border: 2px solid $accentColor1;
+  color: $accentColor1;
+  letter-spacing: 1px;
+  text-shadow: 0;
+  font: {
+    size: 12px;
+    weight: bold;
+  }
+  cursor: pointer;
+  transition: all 0.25s ease;
+  &:hover {
+    color: white;
+    background: $accentColor1;
+  }
+  &:active {
+    letter-spacing: 2px;
+  }
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.status {
+  font-size: 1rem; /* 16px */
+  line-height: 1.5rem; /* 24px */
+  font-weight: bold;
+}
+
+.loading {
+  color: #94a3b8;
+}
+
+.success {
+  color: $accentColor1;
+}
+
+.error {
+  color: #ef4444;
+}

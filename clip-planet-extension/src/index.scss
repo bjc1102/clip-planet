@@ -1,0 +1,33 @@
+$primaryColor1: #222831;
+$primaryColor2: #393e46;
+$accentColor1: #00adb5;
+$accentColor2: #eeeeee;
+
+body {
+  position: relative;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  width: 350px;
+  height: 300px;
+  background-color: $primaryColor1;
+}
+
+#root {
+  width: inherit;
+  height: inherit;
+  box-sizing: border-box;
+  padding: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}

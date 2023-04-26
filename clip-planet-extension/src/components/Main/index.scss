@@ -1,0 +1,61 @@
+@import "../../index.scss";
+
+.error_text {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.75rem; /* 28px */
+  color: white;
+}
+
+.icon_wrapper {
+  width: 24px;
+  height: 24px;
+}
+
+.tab_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  h3 {
+    color: white;
+    font-size: 1rem; /* 16px */
+    line-height: 1.5rem; /* 24px */
+    font-weight: bold;
+    margin: 0px;
+    text-align: center;
+  }
+  img {
+    width: 24px;
+    height: 24px;
+    background: $primaryColor2;
+    overflow: hidden;
+    border-radius: 50%;
+    padding: 5px;
+    box-sizing: content-box;
+  }
+}
+
+.alert_wrapper {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  top: 25px;
+  right: 25px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  &:hover {
+    span {
+      color: #991b1b;
+    }
+    svg {
+      stroke: #991b1b;
+    }
+  }
+  span {
+    display: block;
+    color: #ef4444;
+  }
+}

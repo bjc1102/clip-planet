@@ -1,0 +1,96 @@
+@import "../../index.scss";
+
+$white: #fff;
+$gray: #9b9b9b;
+
+.form__title {
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 1.6rem;
+  color: $white;
+  font-weight: normal;
+}
+
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid $gray;
+  outline: 0;
+  font-size: 1.2rem;
+  color: $white;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: $gray;
+}
+
+.form__field:focus {
+  ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: $accentColor1;
+    font-weight: 700;
+  }
+  padding-bottom: 6px;
+  font-weight: 500;
+  border-width: 3px;
+  border-image: linear-gradient(to right, $gray, $accentColor1);
+  border-image-slice: 1;
+}
+/* reset input */
+.form__field {
+  &:required,
+  &:invalid {
+    box-shadow: none;
+  }
+}
+
+.btn__submit {
+  margin-top: 10px;
+  float: right;
+  background-color: $primaryColor2;
+  color: $white;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  visibility: visible;
+  &:hover {
+    background-color: #4b5563;
+  }
+  &:active {
+    background-color: #868b91;
+  }
+  &:disabled {
+    color: $gray;
+    pointer-events: none;
+  }
+}
