@@ -24,6 +24,7 @@ yarn install && yarn dev
 
 폴더구조는 [리액트 공식문서](https://legacy.reactjs.org/docs/faq-structure.html)와 [React-Query 개발자의 문서](https://tkdodo.eu/blog/effective-react-query-keys#colocate)를 참조하였습니다.
 
+```
 .
 ├── components
 │   ├── Authentication
@@ -112,3 +113,4 @@ yarn install && yarn dev
 │   ├── validate.ts
 │   └── window.ts
 └── yarn.lock
+```
