@@ -66,3 +66,14 @@
   - [컴파일을 위한 파일을 찾을 수 없음](https://choiblog.tistory.com/134)
   - [파일 경로 설정 문제](https://choiblog.tistory.com/133)
     <br/>
+
+### Run
+
+Login
+![화면 기록 2023-04-30 오전 9 28 13](https://user-images.githubusercontent.com/71929440/235330036-111cea2c-28ea-46cb-a8fc-73e0ad3bf932.gif)
+
+Clip
+![화면 기록 2023-04-30 오전 9 13 08](https://user-images.githubusercontent.com/71929440/235330006-91943dc9-e9ce-4ebb-8b86-ca9e9e9592d7.gif)
+
+Delete
+![화면 기록 2023-04-30 오전 9 20 38](https://user-images.githubusercontent.com/71929440/235330008-98c9b7c8-9819-4e67-af33-ed06d38547d6.gif)
