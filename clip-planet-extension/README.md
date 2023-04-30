@@ -21,8 +21,8 @@ Chrome Extension, TypeScript and React
 
 ## Tech Stack
 
-Boilerplate: chrome-extension-typescript-starter with React <br/>
-CSS: SCSS <br/>
+Boilerplate: chrome-extension-typescript-starter with React 
+CSS: SCSS
 Bundling tool: Webpack <br/>
 
 ## Project Structure
@@ -31,6 +31,59 @@ Bundling tool: Webpack <br/>
 * src/assets: static files
 * dist: Chrome Extension directory
 * dist/js: Generated JavaScript files
+
+```
+.
+├── LICENSE
+├── README.md
+├── package-lock.json
+├── package.json
+├── public
+│   ├── icon128.png
+│   ├── icon16.png
+│   ├── icon48.png
+│   ├── manifest.json
+│   └── popup.html
+├── src
+│   ├── background.ts
+│   ├── components
+│   │   ├── ClipSubmitButton
+│   │   │   ├── index.scss
+│   │   │   └── index.tsx
+│   │   ├── Input
+│   │   │   ├── index.scss
+│   │   │   └── index.tsx
+│   │   ├── Main
+│   │   │   ├── index.scss
+│   │   │   ├── index.tsx
+│   │   │   └── queries
+│   │   │       └── createClip.ts
+│   │   └── assets
+│   │       ├── Alert.scss
+│   │       ├── AlertIcon.tsx
+│   │       ├── PlanetIcon.tsx
+│   │       └── planet.scss
+│   ├── constants
+│   │   └── default.ts
+│   ├── hooks
+│   │   ├── reducer
+│   │   │   └── ApiReducer.ts
+│   │   └── useAsync.tsx
+│   ├── index.scss
+│   ├── popup.tsx
+│   ├── types
+│   │   ├── tab.ts
+│   │   └── util.ts
+│   └── utils
+│       └── sliceString.ts
+├── tsconfig.json
+├── webpack
+│   ├── webpack.common.js
+│   ├── webpack.dev.js
+│   └── webpack.prod.js
+└── workflows
+    └── build.yml
+    ```
 
 ## Setup
 
@@ -62,5 +115,3 @@ type `Ctrl + Shift + B`
 
 Load `dist` directory
 
-## Test
-`npx jest` or `npm run test`
