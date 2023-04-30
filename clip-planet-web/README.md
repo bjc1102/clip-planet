@@ -1,4 +1,4 @@
-<!-- prettier-ignore -->
+
 # Clip-planet-web
 
 # Tech Stack
