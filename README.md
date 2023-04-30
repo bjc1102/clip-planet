@@ -67,6 +67,9 @@
   - [파일 경로 설정 문제](https://choiblog.tistory.com/133)
     <br/>
 
+### How to run
+디렉토리 별 Readmme 참조
+
 ### Run
 
 Login
