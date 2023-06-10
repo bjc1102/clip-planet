@@ -1,5 +1,7 @@
 # Clip planet server
 
+커밋 로그는 [clip-planet-server](https://github.com/bjc1102/clipplanet-server)에서 확인하실 수 있습니다
+
 ## Description
 아침마다 여러 기술 블로그를 보면서 편하게 블로그 링크를 등록해놓거나 나중에 읽을 포스트들을 저장해놓을 수 있도록 웹클리퍼 기능을 지원하고 있습니다. <br/>
 [노션 웹클리퍼 / Notion Web Clipper](https://www.notion.so/ko-kr/web-clipper) 해당 서비스를 참고하였습니다.
