@@ -27,20 +27,23 @@
 
 # Feature summary
 
+- 기술스택 도입에 대한 고민
+- 개발 과정과 프로젝트 실패에 대한 회고
 - Chrome Extension을 통한 사이트 클립
-  - [Extension API](https://developer.chrome.com/docs/extensions/reference/)를 통한 open graph 추출
-  - API Key를 통한 서버와 연결
-- Google OAuth를 통한 로그인
-  - JWT을 통한 로그인 관리
+    - Custom한 Webpack 설정
+    - [Extension API](https://developer.chrome.com/docs/extensions/reference/)를 통한 open graph 추출
+    - Hook을 통한 서버 상태 관리
+- Google OAuth를 통한 로그인 및 JWT을 통한 로그인 관리
 - Web clip data CRUD
-  - REST API를 통한 CRUD 구축
-  - 보안, 가독성, 생산성을 위한 ORM 구축(TypeORM)
-  - NestJS를 통한 구조화 및 Decorator, pipe, DTO 등 클린코드를 위한 표준화된 문서 참조
-  - 함수형 프로그래밍 및 코드 리팩토링
+    - REST API를 통한 CRUD 구축
+    - 보안, 가독성, 생산성을 위한 ORM 구축(TypeORM)
+    - NestJS 구조화 및 Decorator, pipe, DTO 등 디자인 패턴 적용
+    - 함수형 프로그래밍 및 코드 리팩토링
 - DevOps
-  - 도커를 통한 배포환경 동기화
-  - 서버, MySQL, NGINX 컨테이너 관리를 위한 도커 컴포즈 구축
-  - 도메인 설정 및 GCE 구축
+    - 도커를 통한 배포환경 동기화
+    - 추가적인 컨테이너 관리를 위한 도커 컴포즈 구축
+    - Custom한 NGINX 설정
+    - DNS 설정 및 인스턴스 구축
 
 # Trouble shooting & Review
 
