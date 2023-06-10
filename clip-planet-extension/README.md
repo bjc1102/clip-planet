@@ -1,5 +1,7 @@
 # Clip-planet-extension
 
+커밋 로그는 [clip-planet-extension](https://github.com/bjc1102/clip-planet-extension)에서 확인하실 수 있습니다
+
 ## Summary
 - api key를 통해 유저 정보 식별
 - Chrome extension API를 활용하여 현재 chrome tab의 사이트 정보 추출
