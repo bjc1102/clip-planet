@@ -1,6 +1,8 @@
 
 # Clip-planet-web
 
+커밋로그는 [clip-planet-web](https://github.com/bjc1102/clipplanet-web/commits/main)레포에서 확인하실 수 있습니다
+
 # Tech Stack
 
 - NextJS
