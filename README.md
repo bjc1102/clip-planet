@@ -50,9 +50,6 @@
 ### Review
 
 - [KPT 회고로 프로젝트 실패 회고하기](https://choiblog.tistory.com/158)
-- [개인 프로젝트 진행사항 - TIL](https://choiblog.tistory.com/132)
-- [개인 프로젝트 개발일지(2) - TIL](https://choiblog.tistory.com/131)
-- [개인 프로젝트 개발일지(1) - TIL](https://choiblog.tistory.com/130)
 
 ### Trouble shooting
 
